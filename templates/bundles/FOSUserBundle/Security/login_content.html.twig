@@ -4,9 +4,9 @@
 {% endif %}
 
 
-
 <body>
-
+<div class="home">
+<h3 class="homeTitle">Se conecter</h3>
 <form action="{{ path("fos_user_security_check") }}" method="post">
     {% if csrf_token %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
@@ -32,5 +32,7 @@
         {% endfor %}
     {% endfor %}
 {% endif %}
+
+</div>
 </body>
 </html>
