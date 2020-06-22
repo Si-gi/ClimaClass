@@ -3,22 +3,22 @@
 
 namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
-
-class DefaultController
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+class DefaultController extends AbstractController
 {
 
     /**
-     * @Route("/homepage", name="homepage")
+     * @Route("/", name="homepage")
      */
     public function index() {
 
         // $videos = $this->parsing($this->__URL);
-        if($this->getUser()){
-            return $this->redirectToRoute("articles");
-        }
-        else{
+//        if($this->getUser()){
+//            return $this->redirectToRoute("articles");
+//        }
+//        else{
             return $this->redirectToRoute("fos_user_security_login");
-        }
+    //    }
 
     }
 }
