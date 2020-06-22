@@ -135,10 +135,11 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/config/packages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Security" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dossier\symfo\ClimaClass\templates\bundles\FOSUserBundle\Security" />
       <recent name="D:\dossier\symfo\ClimaClass\config\packages" />
     </key>
   </component>
@@ -165,7 +166,9 @@
       <option name="presentableId" value="Default" />
       <updated>1592555429470</updated>
       <workItem from="1592555430700" duration="3548000" />
-      <workItem from="1592573375751" duration="16000" />
+      <workItem from="1592573375751" duration="639000" />
+      <workItem from="1592600959267" duration="608000" />
+      <workItem from="1592815184209" duration="760000" />
     </task>
     <servers />
   </component>
