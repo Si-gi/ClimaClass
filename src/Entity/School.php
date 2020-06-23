@@ -32,10 +32,20 @@ class School
      */
     private $State;
 
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var float
+     *
+     * @ORM\Column(name="latitude", type="float", scale=7, nullable=true)
      */
-    private $localisation;
+    private $latitude;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longitude", type="float", scale=7, nullable=true)
+     */
+    private $longitude;
 
     public function getId(): ?int
     {
@@ -78,15 +88,20 @@ class School
         return $this;
     }
 
-    public function getLocalisation(): ?string
-    {
-        return $this->localisation;
-    }
-
-    public function setLocalisation(string $localisation): self
-    {
-        $this->localisation = $localisation;
+    /**
+     * @param float $longitude
+     * @return User
+     */
+    public function setLongitude($longitude) {
+        $this->longitude = $longitude;
 
         return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude() {
+        return $this->longitude;
     }
 }

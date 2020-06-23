@@ -24,4 +24,55 @@ class User extends BaseUser
         parent::__construct();
         // your own logic
     }
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="establishment", type="string", length=255, nullable=true)
+     */
+    private $establishment;
+
+    /**
+     * Set establishment
+     *
+     * @param string $establishment
+     * @return User
+     */
+    public function setEstablishment($establishment) {
+        $this->establishment = $establishment;
+
+        return $this;
+    }
+
+    /**
+     * Get establishment
+     *
+     * @return string
+     */
+    public function getEstablishment() {
+        return $this->establishment;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param float $latitude
+     * @return User
+     */
+    public function setLatitude($latitude) {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return float
+     */
+    public function getLatitude() {
+        return $this->latitude;
+    }
+
+
 }
