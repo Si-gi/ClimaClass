@@ -104,4 +104,22 @@ class School
     public function getLongitude() {
         return $this->longitude;
     }
+
+
+    /**
+     * @param float $latitude
+     * @return User
+     */
+    public function setLatitude($latitude) {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude() {
+        return $this->latitude;
+    }
 }
