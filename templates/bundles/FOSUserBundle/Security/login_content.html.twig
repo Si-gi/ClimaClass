@@ -7,8 +7,6 @@
 <body>
 <div class="connexion">
 <h3 class="homeTitle">Se connecter</h3>
-
-
 <form action="{{ path("fos_user_security_check") }}" method="post">
   <div class="form-group formconnect">
         {% if csrf_token %}
