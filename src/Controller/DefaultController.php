@@ -16,7 +16,7 @@ class DefaultController extends AbstractController
 
         // $videos = $this->parsing($this->__URL);
         if($this->getUser()){
-            return $this->redirectToRoute("articles");
+            return $this->redirectToRoute("myclass");
         }
         else{
             return $this->redirectToRoute("fos_user_security_login");
