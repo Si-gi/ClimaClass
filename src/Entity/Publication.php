@@ -18,6 +18,19 @@ class Publication
      * @ORM\Column(type="integer")
      */
     private $id;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+
+    private $title;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=true)
+     */
+    private $content;
 
     /**
      * @ORM\Column(type="date")
@@ -25,9 +38,15 @@ class Publication
     private $date;
 
     /**
-     * @ORM\ManyToMany(targetEntity=TypeDonnee::class)
-     */
-    private $data;
+     * @ORM\OneToMany(targetEntity="Measure", mappedBy="report", cascade={"persist"})
+     **/
+    private $measures;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="publication")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     **/
+    private $eleve;
 
     public function __construct()
     {
@@ -50,30 +69,69 @@ class Publication
 
         return $this;
     }
+    /**
+     * @param Measure $measures
+     * @return Pulbicatoin
+     */
+    public function addMeasure(Measure $measures)
+    {
+        $this->measures->add($measures);
+        $measures->setReport($this);
+        return $this;
+    }
 
     /**
-     * @return Collection|TypeDonnee[]
+     * $measures
      */
-    public function getData(): Collection
+    public function removeMeasure(Measure $measures)
     {
-        return $this->data;
+        $this->measures->removeElement($measures);
+        $measures->setReport(null);
     }
 
-    public function addData(TypeDonnee $data): self
+    /**
+     * @return Collection
+     */
+    public function getMeasures()
     {
-        if (!$this->data->contains($data)) {
-            $this->data[] = $data;
-        }
+        return $this->measures;
+    }
+
+    /**
+     * @param string $title
+     * @return Publication
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
 
         return $this;
     }
 
-    public function removeData(TypeDonnee $data): self
+    /**
+     * @return string
+     */
+    public function getTitle()
     {
-        if ($this->data->contains($data)) {
-            $this->data->removeElement($data);
-        }
+        return $this->title;
+    }
+
+    /**
+     * @param string $content
+     * @return Publication
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 }

@@ -64,10 +64,10 @@ class Measure
     private $rainMeasureDuration;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Report", inversedBy="measures", cascade={"persist"})
-     * @ORM\JoinColumn(name="id_report", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Publication", inversedBy="measures", cascade={"persist"})
+     * @ORM\JoinColumn(name="id_publication", referencedColumnName="id")
      **/
-    private $report;
+    private $publication;
 
     /**
      * @return integer
@@ -173,22 +173,22 @@ class Measure
     }
 
     /**
-     * @param \ClimaClass\ApplicationBundle\Entity\Report $report
+     * @param Publication $report
      * @return Measure
      */
-    public function setReport(\ClimaClass\ApplicationBundle\Entity\Report $report = null)
+    public function setReport(Publication $publication = null)
     {
-        $this->report = $report;
+        $this->publication = $publication;
 
         return $this;
     }
 
     /**
-     * @return \ClimaClass\ApplicationBundle\Entity\Report
+     * @return Publication
      */
     public function getReport()
     {
-        return $this->report;
+        return $this->publication;
     }
 
 
