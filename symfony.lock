@@ -109,6 +109,9 @@
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
+    "pagerfanta/pagerfanta": {
+        "version": "v2.3.0"
+    },
     "php": {
         "version": "7.3"
     },
@@ -343,16 +346,10 @@
             "./tests/bootstrap.php"
         ]
     },
-    "symfony/polyfill-intl-grapheme": {
-        "version": "v1.17.0"
-    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.17.0"
     },
     "symfony/polyfill-intl-idn": {
-        "version": "v1.17.0"
-    },
-    "symfony/polyfill-intl-normalizer": {
         "version": "v1.17.0"
     },
     "symfony/polyfill-mbstring": {
@@ -428,9 +425,6 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.10"
-    },
-    "symfony/string": {
-        "version": "v5.1.2"
     },
     "symfony/templating": {
         "version": "v4.4.10"
