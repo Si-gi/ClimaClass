@@ -3,12 +3,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="user")
  */
 class User extends BaseUser
 {
@@ -23,7 +25,8 @@ class User extends BaseUser
     {
         parent::__construct();
         // your own logic
-    }
+
+        $this->classroom = new ArrayCollection();    }
 
     /**
      * @var string
@@ -31,6 +34,11 @@ class User extends BaseUser
      * @ORM\Column(name="establishment", type="string", length=255, nullable=true)
      */
     private $establishment;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Classroom::class, inversedBy="users", cascade={"persist", "remove"})
+     */
+    private $classroom;
 
     /**
      * Set establishment
@@ -72,6 +80,34 @@ class User extends BaseUser
      */
     public function getLatitude() {
         return $this->latitude;
+    }
+
+    /**
+     * @return Collection|Classroom[]
+     */
+    public function getClassroom(): Collection
+    {
+        return $this->classroom;
+    }
+
+    public function addClassroom(Classroom $classroom): self
+    {
+        if (!$this->classroom->contains($classroom)) {
+            $this->classroom[] = $classroom;
+            $classroom->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClassroom(Classroom $classroom): self
+    {
+        if ($this->classroom->contains($classroom)) {
+            $this->classroom->removeElement($classroom);
+            $classroom->removeUser($this);
+        }
+
+        return $this;
     }
 
 

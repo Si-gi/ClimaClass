@@ -11,3 +11,19 @@ easy_admin:
           # if administrators are allowed to edit users' passwords and roles, add this:
           - { property: 'plainPassword', type: 'text', type_options: { required: false } }
           - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_TEACHER': 'ROLE_TEACHER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
+    Classroom:
+      class: App\Entity\Classroom
+      form:
+        fields:
+          - name
+          - year
+          - { property: 'users', type_options: { by_reference: false} }
+    School:
+      class: App\Entity\School
+      form:
+        fields:
+          - Name
+          - city
+          - State
+          - latitude
+          - longitude
