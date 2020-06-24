@@ -1,0 +1,32 @@
+
+
+
+{% block content %}
+    {% block body %}
+        <div class="row">
+            <div class="col-sm-12 blog-main">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="bg-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <form action="{{ path('search') }}" method="get" name="search">
+                    <input type="text" name="state">
+                    <input type="text" name="city">
+                    <input type="text" name="name">
+                    <input type="text" name="latitude">
+                    <input type="text" name="longitude">
+                    <input type="submit" name="search_submit">
+                </form>
+            </div>
+            </div>
+
+        {% block results %}
+            {% if school is defined %}
+            {% endblock %}
+        {% endblock body %}
+
+            {% endblock content %}
+
