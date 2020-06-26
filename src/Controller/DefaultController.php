@@ -51,15 +51,21 @@ class DefaultController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function search(Request $request){
+        $success = false;
         if(count($_GET) == 0){
             $schools = null;
 
         }else{
             $schools = $this->schoolRepository->findByQuery($_GET['state'],$_GET['city'],$_GET['name'],$_GET['latitude'],$_GET['longitude']);
-
+            if(count($schools) > 0){
+                $this->addFlash('success', 'résultats trouvés');
+            }else{
+                $this->addFlash('error', 'No results found');
+            }
         }
         return $this->render('search.html.twig', [
             'schools' => $schools,
+            'success' => $success
         ]);
     }
 }

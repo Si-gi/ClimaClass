@@ -2,6 +2,14 @@
 
 
 {% block content %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="bg-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     {% block body %}
         <div class="row">
             <div class="col-sm-12 blog-main">
@@ -25,15 +33,18 @@
 
         {% block results %}
             {% if schools is not null %}
-                <table>
-                    <thead>
-                    <tr>
-                        <th>State</th>
-                        <th>City</th>
-                        <th>School name</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                {% if success == false %}
+                    <p>No results found</p>
+                {% elseif success == true %}
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>State</th>
+                            <th>City</th>
+                            <th>School name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         {% for school in schools %}
                             <tr>
                                 <td>{{ school['State'] }} </td>
@@ -41,8 +52,12 @@
                                 <td>{{ school['Name'] }}</td>
                             </tr>
                         {% endfor %}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endif %}
+            {% if schools is not null %}
+
             {% endif %}
         {% endblock %}
         {% endblock body %}

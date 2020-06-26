@@ -26,39 +26,40 @@ class SchoolRepository extends ServiceEntityRepository
      * @param null $name
      * @param null $latitude
      * @param null $longitude
-     * @return void array
+     * @return School[]
      */
     public function findByQuery($state = null,$city = null,$name = null,$latitude = null,$longitude = null){
 
             $query = $this->createQueryBuilder('school');
             if($state != null){
-                $query->Where('school.State = :state')
+                $query->orWhere('school.State= :state')
                 ->setParameter('state', $state);
             }
             if($city != null){
-                $query->orWhere('school.city = :city')
+                $query->orWhere('school.city= :city')
                     ->setParameter('city', $city);
             }
             if($name != null){
-                $query->orWhere('school.Name = :name')
+                $query->orWhere('school.Name= :name')
                     ->setParameter('name', $name);
             }
             if($latitude != null){
-                $query->orWhere('school.latitude > :latitudeA')
-                    ->andWhere('school.latitude < :$latitudeB' )
-                    ->setParameter('latitudeA', $latitude-200);
-                    ->setParameter('latitudeB', $latitude+200);
+                $query->orWhere('school.latitude> :latitudeA')
+                    ->andWhere('school.latitude< :latitudeB' )
+                    ->setParameter('latitudeA', $latitude-200)
+                    ->setParameter('latitudeB', $latitude+200.);
             }
             if($longitude != null){
-                $query->orWhere('school.longitude > :longitudeA')
-                    ->andWhere('school.longitude < :longitudeB')
+                $query->orWhere('school.longitude> :longitudeA')
+                    ->andWhere('school.longitude< :longitudeB')
                     ->setParameter('longitudeA', $longitude-200)
                     ->setParameter('longitudeB', $longitude+200);
             }
 
-            $query->setMaxResults(4)
+
+            $query = $query
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
             return $query;
     }
     // /**
