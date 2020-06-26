@@ -21,13 +21,42 @@ class SchoolRepository extends ServiceEntityRepository
 
 
     /**
-     * @return School array
+     * @param null $state
+     * @param null $city
+     * @param null $name
+     * @param null $latitude
+     * @param null $longitude
+     * @return void array
      */
-    public function findByQuery(){
-        return $this->createQueryBuilder('school')
-            ->andWhere()
-            ->andWhere()
-            ->
+    public function findByQuery($state = null,$city = null,$name = null,$latitude = null,$longitude = null){
+
+            $query = $this->createQueryBuilder('school');
+            if($state != null){
+                $query->Where('school.State = :state')
+                ->setParameter('state', $state);
+            }
+            if($city != null){
+                $query->orWhere('school.city = :city')
+                    ->setParameter('city', $city);
+            }
+            if($name != null){
+                $query->orWhere('school.Name = :name')
+                    ->setParameter('name', $name);
+            }
+            if($latitude != null){
+                $query->orWhere('school.latitude = :latitude')
+                    ->setParameter('latitude', $latitude);
+            }
+            if($longitude != null){
+                $query->orWhere('school.longitude = :longitude')
+                    ->setParameter('longitude', $longitude);
+            }
+
+
+            $query->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+            return $query;
     }
     // /**
     //  * @return School[] Returns an array of School objects

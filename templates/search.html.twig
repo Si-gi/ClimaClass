@@ -24,8 +24,27 @@
             </div>
 
         {% block results %}
-            {% if school is defined %}
-            {% endblock %}
+            {% if schools is not null %}
+                <table>
+                    <thead>
+                    <tr>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>School name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for school in schools %}
+                            <tr>
+                                <td>{{ school['State'] }} </td>
+                                <td>{{ school['city'] }}</td>
+                                <td>{{ school['Name'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endblock %}
         {% endblock body %}
 
             {% endblock content %}

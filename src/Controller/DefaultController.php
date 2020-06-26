@@ -3,12 +3,30 @@
 
 namespace App\Controller;
 
+use App\Entity\School;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-class DefaultController extends AbstractController
+use Doctrine\ORM\EntityManagerInterface;
 
+class DefaultController extends AbstractController
 {
+    /** @var EntityManagerInterface */
+    private $entityManager;
+    /** @var \Doctrine\Common\Persistence\ObjectRepository */
+    private $schoolRepository;
+
+
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+        $this->schoolRepository = $entityManager->getRepository(School::class);
+    }
+
+
 
     /**
      * @Route("/", name="homepage")
@@ -37,10 +55,11 @@ class DefaultController extends AbstractController
             $schools = null;
 
         }else{
-            $school = null;
+            $schools = $this->schoolRepository->findByQuery($_GET['state'],$_GET['city'],$_GET['name'],$_GET['latitude'],$_GET['longitude']);
+
         }
         return $this->render('search.html.twig', [
-            'school' => $school,
+            'schools' => $schools,
         ]);
     }
 }
