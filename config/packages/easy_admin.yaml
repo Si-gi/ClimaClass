@@ -27,3 +27,4 @@ easy_admin:
           - State
           - latitude
           - longitude
+          - { property: 'classrooms', type_options: { by_reference: false} }

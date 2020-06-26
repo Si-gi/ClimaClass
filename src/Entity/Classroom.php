@@ -35,6 +35,12 @@ class Classroom
      */
     private $users;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=School::class, inversedBy="classrooms")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $school;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -93,6 +99,18 @@ class Classroom
             $this->users->removeElement($user);
             $user->removeClassroom($this);
         }
+
+        return $this;
+    }
+
+    public function getSchool(): ?School
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?School $school): self
+    {
+        $this->school = $school;
 
         return $this;
     }
