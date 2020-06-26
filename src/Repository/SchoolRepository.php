@@ -44,14 +44,17 @@ class SchoolRepository extends ServiceEntityRepository
                     ->setParameter('name', $name);
             }
             if($latitude != null){
-                $query->orWhere('school.latitude = :latitude')
-                    ->setParameter('latitude', $latitude);
+                $query->orWhere('school.latitude > :latitudeA')
+                    ->andWhere('school.latitude < :$latitudeB' )
+                    ->setParameter('latitudeA', $latitude-200);
+                    ->setParameter('latitudeB', $latitude+200);
             }
             if($longitude != null){
-                $query->orWhere('school.longitude = :longitude')
-                    ->setParameter('longitude', $longitude);
+                $query->orWhere('school.longitude > :longitudeA')
+                    ->andWhere('school.longitude < :longitudeB')
+                    ->setParameter('longitudeA', $longitude-200)
+                    ->setParameter('longitudeB', $longitude+200);
             }
-
 
             $query->setMaxResults(4)
             ->getQuery()
