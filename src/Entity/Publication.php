@@ -71,7 +71,7 @@ class Publication
     }
     /**
      * @param Measure $measures
-     * @return Pulbicatoin
+     * @return Publication
      */
     public function addMeasure(Measure $measures)
     {
@@ -133,5 +133,22 @@ class Publication
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEleve()
+    {
+        return $this->eleve;
+    }
+
+    /**
+     * @param User $eleve
+     * @return Pulbicatoin
+     */
+    public function setEleve($eleve){
+      $this->eleve = $eleve;
+      return $this;
     }
 }

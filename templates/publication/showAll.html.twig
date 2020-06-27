@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Content</th>
                 <th>Date</th>
@@ -18,7 +17,6 @@
         <tbody>
         {% for publication in publications %}
             <tr>
-                <td>{{ publication.id }}</td>
                 <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a></td>
                 <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a></td>
                 <td>{{ publication.date ? publication.date|date('Y-m-d') : '' }}</td>
@@ -35,4 +33,5 @@
     </table>
 
     <a href="{{ path('publication_new') }}">Créer un nouveau relevé </a>
+    <h2>{{ app.user.roles[0] }}</h2>
 {% endblock %}
