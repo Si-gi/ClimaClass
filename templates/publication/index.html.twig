@@ -1,38 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Publication index{% endblock %}
+{% block title %}Hello PublicationController!{% endblock %}
 
 {% block body %}
-    <h1>Publication index</h1>
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Date</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for publication in publications %}
-            <tr>
-                <td>{{ publication.id }}</td>
-                <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a></td>
-                <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a></td>
-                <td>{{ publication.date ? publication.date|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('publication_show', {'id': publication.id}) }}">voir le relevé</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">pas de relevé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    <a href="{{ path('publication_new') }}">Créer un nouveau relevé </a>
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/symfony/projet_tutore_climaclass/ClimaClass/src/Controller/PublicationController.php'|file_link(0) }}">src/Controller/PublicationController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/wamp64/www/symfony/projet_tutore_climaclass/ClimaClass/templates/publication/index.html.twig'|file_link(0) }}">templates/publication/index.html.twig</a></code></li>
+    </ul>
+</div>
 {% endblock %}
