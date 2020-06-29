@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publication index{% endblock %}
+
+{% block body %}
+    <h1>Publication index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publication in publications %}
+            <tr>
+                <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a></td>
+                <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a></td>
+                <td>{{ publication.date ? publication.date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('publication_show', {'id': publication.id}) }}">voir le relevé</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">pas de relevé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('publication_new') }}">Créer un nouveau relevé </a>
+    <h2>{{ app.user.roles[0] }}</h2>
+{% endblock %}

@@ -10,3 +10,6 @@ easy_admin_bundle:
 myclass:
   path: /myclass
   controller: App\Controller\MyClassController
+publication:
+  path: /publication/showAll
+  controller: App\Controller\PublicationController
