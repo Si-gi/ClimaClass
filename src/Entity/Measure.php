@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MeasureRepository;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Measure
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="MeasureRepository::class")
+ * @ORM\Table(name="measure")
+ * @ORM\Entity(repositoryClass="App\Repository\MeasureRepository")
  */
 class Measure
 {
@@ -68,6 +72,11 @@ class Measure
      * @ORM\JoinColumn(name="id_publication", referencedColumnName="id")
      **/
     private $publication;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Classroom::class, inversedBy="measures")
+     */
+    private $classroom;
 
     /**
      * @return integer
@@ -209,5 +218,17 @@ class Measure
     public function getRainMeasureDuration()
     {
         return $this->rainMeasureDuration;
+    }
+
+    public function getClassroom(): ?Classroom
+    {
+        return $this->classroom;
+    }
+
+    public function setClassroom(?Classroom $classroom): self
+    {
+        $this->classroom = $classroom;
+
+        return $this;
     }
 }

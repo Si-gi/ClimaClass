@@ -41,9 +41,15 @@ class Classroom
      */
     private $school;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Measure::class, mappedBy="classroom")
+     */
+    private $measures;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->measures = new ArrayCollection();
     }
     public function __toString()
     {
@@ -115,6 +121,37 @@ class Classroom
     public function setSchool(?School $school): self
     {
         $this->school = $school;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Measure[]
+     */
+    public function getMeasures(): Collection
+    {
+        return $this->measures;
+    }
+
+    public function addMeasure(Measure $measure): self
+    {
+        if (!$this->measures->contains($measure)) {
+            $this->measures[] = $measure;
+            $measure->setClassroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeasure(Measure $measure): self
+    {
+        if ($this->measures->contains($measure)) {
+            $this->measures->removeElement($measure);
+            // set the owning side to null (unless already changed)
+            if ($measure->getClassroom() === $this) {
+                $measure->setClassroom(null);
+            }
+        }
 
         return $this;
     }
