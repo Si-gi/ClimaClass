@@ -61,17 +61,26 @@ class DefaultController extends AbstractController
             $schools = null;
 
         }else{
-            $schools = $this->schoolRepository->findByQuery($_GET['state'],$_GET['city'],$_GET['name'],$_GET['latitude'],$_GET['longitude']);
-            if(count($schools) > 0){
-                $success = true;
+            $schools_0 = $this->schoolRepository->findByQuery($_GET['state'],$_GET['city'],$_GET['name'],$_GET['latitude'],$_GET['longitude']);
+            if(count($schools_0) > 0){
                 $this->addFlash('success', 'résultats trouvés');
+                $success = true;
+
+                foreach($schools_0 as $school){
+                    $school['classrooms'] = $this->classRoomRepository->findBy(['school' => $school['id']]);
+                    $schools_1[] = $school;
+                    //array_push($school['classrooms'],$classroom);
+                }
+                //dd($schools[0]);
+
             }else{
                 $this->addFlash('error', 'No results found');
             }
         }
         return $this->render('search.html.twig', [
-            'schools' => $schools,
+            'schools' => $schools_1,
             'success' => $success
         ]);
+
     }
 }
