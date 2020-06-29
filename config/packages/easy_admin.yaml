@@ -18,6 +18,7 @@ easy_admin:
           - name
           - year
           - { property: 'users', type_options: { by_reference: false} }
+          - school
     School:
       class: App\Entity\School
       form:
@@ -27,4 +28,3 @@ easy_admin:
           - State
           - latitude
           - longitude
-          - { property: 'classrooms', type_options: { by_reference: false} }
