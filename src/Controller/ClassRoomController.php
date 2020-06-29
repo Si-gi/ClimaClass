@@ -8,8 +8,9 @@ use App\Entity\Classroom;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ClassRoomController
+class ClassRoomController extends AbstractController
 {
     /** @var EntityManagerInterface */
     private $entityManager;
@@ -30,8 +31,8 @@ class ClassRoomController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function classroom(Request $request){
+    public function classroom(Request $request, $id){
 
-        $classroom = $this->classRoomRepository->find($request->get("id"));
+        $classroom = $this->classRoomRepository->find($id);
     }
 }
