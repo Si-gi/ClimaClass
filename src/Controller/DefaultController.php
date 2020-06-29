@@ -39,7 +39,7 @@ class DefaultController extends AbstractController
 
         // $videos = $this->parsing($this->__URL);
         if($this->getUser()){
-            return $this->redirectToRoute("myclass");
+            return $this->redirectToRoute("publication");
         }
         else{
             return $this->redirectToRoute("fos_user_security_login");
@@ -74,5 +74,4 @@ class DefaultController extends AbstractController
             'success' => $success
         ]);
     }
-
 }
