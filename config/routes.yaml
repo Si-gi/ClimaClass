@@ -11,5 +11,5 @@ myclass:
   path: /myclass
   controller: App\Controller\MyClassController
 publication:
-  path: /publication/showAll
+  path: /publication/
   controller: App\Controller\PublicationController

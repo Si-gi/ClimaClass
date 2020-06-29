@@ -41,9 +41,14 @@ class Classroom
      */
     private $school;
 
+  
+
+
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->publicMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,4 +119,41 @@ class Classroom
 
         return $this;
     }
+
+    /**
+     * @return Collection|PublicMessage[]
+     */
+    public function getPublicMessages(): Collection
+    {
+        return $this->publicMessages;
+    }
+
+    public function addPublicMessage(PublicMessage $publicMessage): self
+    {
+        if (!$this->publicMessages->contains($publicMessage)) {
+            $this->publicMessages[] = $publicMessage;
+            $publicMessage->setIdClasseEmeteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePublicMessage(PublicMessage $publicMessage): self
+    {
+        if ($this->publicMessages->contains($publicMessage)) {
+            $this->publicMessages->removeElement($publicMessage);
+            // set the owning side to null (unless already changed)
+            if ($publicMessage->getIdClasseEmeteur() === $this) {
+                $publicMessage->setIdClasseEmeteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 }
