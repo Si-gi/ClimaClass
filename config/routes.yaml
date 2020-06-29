@@ -1,15 +1,17 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-fos_user:
-  resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+fos_user_security:
+  resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 easy_admin_bundle:
   resource: '@EasyAdminBundle/Controller/EasyAdminController.php'
   prefix: /admin
   type: annotation
-myclass:
-  path: /myclass
-  controller: App\Controller\MyClassController
+
+classroom:
+  path: /classroom/{id}
+  controller: App\Controller\ClassRoomController
 publication:
   path: /publication/showAll
   controller: App\Controller\PublicationController
+
