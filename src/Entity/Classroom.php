@@ -146,6 +146,8 @@ class Classroom
         if (!$this->measures->contains($measure)) {
             $this->measures[] = $measure;
             $measure->setClassroom($this);
+        }
+    }
 	/*
      * @return Collection|PublicMessage[]
      */
@@ -173,6 +175,9 @@ class Classroom
             // set the owning side to null (unless already changed)
             if ($measure->getClassroom() === $this) {
                 $measure->setClassroom(null);
+            }
+        }
+    }
 
     public function removePublicMessage(PublicMessage $publicMessage): self
     {
