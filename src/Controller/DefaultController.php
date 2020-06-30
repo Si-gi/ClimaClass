@@ -56,6 +56,7 @@ class DefaultController extends AbstractController
      */
     public function search(Request $request){
         $success = false;
+        $schools_1 = null;
 
         if(count($_GET) == 0){
             $schools_1 = null;
@@ -71,10 +72,11 @@ class DefaultController extends AbstractController
                     $schools_1[] = $school;
                 }
             }else{
-                $schools_1 =
+                $schools_1 = null;
                 $this->addFlash('error', 'No results found');
             }
         }
+
         return $this->render('search.html.twig', [
             'schools' => $schools_1,
             'success' => $success

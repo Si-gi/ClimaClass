@@ -102,6 +102,30 @@ class Classroom
         return $this->users;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTeacher()
+    {
+        $users = $this->getUsers();
+
+        foreach ($users as $user){
+
+            if($user->getRoles() == "ROLE_TEACHER" || $user->getRoles() == "ROLE_ADMIN" || $user->getRoles() == "ROLE_SUPER_ADMIN"){
+                return $user->getId();
+            }else{
+                $roles = $user->getRoles();
+                foreach ($roles as $role){
+                    if($role == "ROLE_TEACHER" || $role == "ROLE_ADMIN" || $role == "ROLE_SUPER_ADMIN"){
+                        return $user->getId();
+                    }
+                }
+            }
+
+        }
+        return null;
+    }
+
     public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {

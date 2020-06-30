@@ -95,7 +95,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('conversation',array("contact" => $receiver));
         }
 
-        return $this->render('/message/Message_Form.html.twig', [
+        return $this->render('/private_message/Message_Form.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -149,7 +149,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('conversation', array("contact" => $receiver->getId()));
         }
 
-        return $this->render('message/Message.html.twig',[
+        return $this->render('private_message/Message.html.twig',[
             "messages" => $messages,
             "user" => $userSender,
             "contact" => $receiver,
@@ -166,7 +166,7 @@ class UserController extends AbstractController
         $contacts = $this->ContactsRepository->findByIdUser($this->getUser()->getId());
         //$contacts = $this->ContactsRepository->findByIdContact($this->getUser()->getId());
 
-        return $this->render('/Messages/Contacts.html.twig',[
+        return $this->render('/private_messages/Contacts.html.twig',[
             'contacts' => $contacts,
         ]);
     }
