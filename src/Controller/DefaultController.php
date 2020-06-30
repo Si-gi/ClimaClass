@@ -69,10 +69,7 @@ class DefaultController extends AbstractController
                 foreach($schools_0 as $school){
                     $school['classrooms'] = $this->classRoomRepository->findBy(['school' => $school['id']]);
                     $schools_1[] = $school;
-                    //array_push($school['classrooms'],$classroom);
                 }
-                //dd($schools[0]);
-
             }else{
                 $this->addFlash('error', 'No results found');
             }

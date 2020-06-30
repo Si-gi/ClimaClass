@@ -46,10 +46,16 @@ class Classroom
      */
     private $measures;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Publication::class, mappedBy="classroom")
+     */
+    private $publications;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->measures = new ArrayCollection();
+        $this->publications = new ArrayCollection();
     }
     public function __toString()
     {
@@ -150,6 +156,37 @@ class Classroom
             // set the owning side to null (unless already changed)
             if ($measure->getClassroom() === $this) {
                 $measure->setClassroom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Publication[]
+     */
+    public function getPublications(): Collection
+    {
+        return $this->publications;
+    }
+
+    public function addPublication(Publication $publication): self
+    {
+        if (!$this->publications->contains($publication)) {
+            $this->publications[] = $publication;
+            $publication->setClassroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removePublication(Publication $publication): self
+    {
+        if ($this->publications->contains($publication)) {
+            $this->publications->removeElement($publication);
+            // set the owning side to null (unless already changed)
+            if ($publication->getClassroom() === $this) {
+                $publication->setClassroom(null);
             }
         }
 
