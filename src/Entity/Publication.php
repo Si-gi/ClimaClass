@@ -69,33 +69,6 @@ class Publication
 
         return $this;
     }
-    /**
-     * @param Measure $measures
-     * @return Publication
-     */
-    public function addMeasure(Measure $measures)
-    {
-        $this->measures->add($measures);
-        $measures->setReport($this);
-        return $this;
-    }
-
-    /**
-     * $measures
-     */
-    public function removeMeasure(Measure $measures)
-    {
-        $this->measures->removeElement($measures);
-        $measures->setReport(null);
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getMeasures()
-    {
-        return $this->measures;
-    }
 
     /**
      * @param string $title

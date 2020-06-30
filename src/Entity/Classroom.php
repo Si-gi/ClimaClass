@@ -216,4 +216,16 @@ class Classroom
 
         return $this;
     }
+
+    public function getMeasures()
+    {
+        $array = [];
+
+        for ($i = 0; $i < count($this->getPublications()); $i++) {
+            if ($this->getPublications()[$i]->getMeasure()) {
+                $array[$i] = $this->getPublications()[$i]->getMeasure();
+            }
+        }
+        return $array;
+    }
 }
