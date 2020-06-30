@@ -40,7 +40,7 @@
 
                 /* Navbar links on mouse-over */
                 .navbar a:hover {
-                    border: 4px solid #4CAF52;
+                    border: 1px solid #4CAF52;
                     border-radius: 10px;
                 }
 
@@ -81,6 +81,13 @@
                 }
                 .fa-user{
                     font-size:40px !important;
+                }
+                .navTog{
+                    margin-left: auto;
+                    margin-right: 62px;
+                }
+                .navTog a{
+                    margin-right: 28px;
                 }
                 a{
                     color:black;
@@ -161,9 +168,11 @@
     </head>
     <div class="navbar">
         <a class="active" href="{{ path('homepage') }}"><i class="fa fa-fw fa-home"></i><br> Climaclass</a>
+    <div class="navTog">
         <a class="menuR"href="#"><i class="fa fa-fw fa-envelope"></i><br> Messages</a>
         <a href="{{ path('publication_index') }}"><i class="fa fa-fw fa-address-card"></i><br> Relevés</a>
         <a href="{{ path('mesure') }}"><i class="fa fa-fw fa-thermometer-full"></i><br> Mesure</a>
+    </div>
         <a href="#"><i class="fa fa-fw fa-user"></i><br> Login</a>
     </div>
 
