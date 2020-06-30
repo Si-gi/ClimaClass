@@ -43,6 +43,11 @@ class Publication
      */
     private $classroom;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Measure::class, inversedBy="publication", cascade={"persist", "remove"})
+     */
+    private $measure;
+
     public function __construct()
     {
         $this->data = new ArrayCollection();
@@ -156,6 +161,18 @@ class Publication
     public function setClassroom(?Classroom $classroom): self
     {
         $this->classroom = $classroom;
+
+        return $this;
+    }
+
+    public function getMeasure(): ?Measure
+    {
+        return $this->measure;
+    }
+
+    public function setMeasure(?Measure $measure): self
+    {
+        $this->measure = $measure;
 
         return $this;
     }

@@ -74,6 +74,11 @@ class Measure
     private $classroom;
 
     /**
+     * @ORM\OneToOne(targetEntity=Publication::class, mappedBy="measure", cascade={"persist", "remove"})
+     */
+    private $publication;
+
+    /**
      * @return integer
      */
     public function getId()
@@ -223,6 +228,24 @@ class Measure
     public function setClassroom(?Classroom $classroom): self
     {
         $this->classroom = $classroom;
+
+        return $this;
+    }
+
+    public function getPublication(): ?Publication
+    {
+        return $this->publication;
+    }
+
+    public function setPublication(?Publication $publication): self
+    {
+        $this->publication = $publication;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newMeasure = null === $publication ? null : $this;
+        if ($publication->getMeasure() !== $newMeasure) {
+            $publication->setMeasure($newMeasure);
+        }
 
         return $this;
     }
