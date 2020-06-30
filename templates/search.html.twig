@@ -57,12 +57,12 @@
                                    <td>{{classroom}}</td>
                                    <td>
 
-                                       <a  href ="{{ path('publications_show', {'id': school['id']}) }}">
-                                           Voir la classe
-                                       </a>
+
                                    </td>
                                    <td>
-                                       Contacter prof
+                                       <a href="{{ path('messages_form',{'receiver': school['id']}) }}">
+                                           Contacter prof
+                                       </a>
                                    </td>
                                    </td>
                                </tr>
