@@ -45,7 +45,7 @@ class PublicMessageController extends AbstractController
       }
 
     /**
-     * @Route("/new", name="public_message_new", methods={"GET","POST"})
+     * @Route("/new/{idEmeteur}/{idDestinataire}", name="public_message_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
