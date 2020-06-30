@@ -41,6 +41,7 @@ class Classroom
      */
     private $school;
 
+
     /**
      * @ORM\OneToMany(targetEntity=Measure::class, mappedBy="classroom")
      */
@@ -56,6 +57,7 @@ class Classroom
         $this->users = new ArrayCollection();
         $this->measures = new ArrayCollection();
         $this->publications = new ArrayCollection();
+		$this->publicMessages = new ArrayCollection();
     }
     public function __toString()
     {
@@ -144,10 +146,25 @@ class Classroom
         if (!$this->measures->contains($measure)) {
             $this->measures[] = $measure;
             $measure->setClassroom($this);
+	/*
+     * @return Collection|PublicMessage[]
+     */
+    public function getPublicMessages(): Collection
+    {
+        return $this->publicMessages;
+    }
+
+    public function addPublicMessage(PublicMessage $publicMessage): self
+    {
+        if (!$this->publicMessages->contains($publicMessage)) {
+            $this->publicMessages[] = $publicMessage;
+            $publicMessage->setIdClasseEmeteur($this);
+
         }
 
         return $this;
     }
+
 
     public function removeMeasure(Measure $measure): self
     {
@@ -156,11 +173,20 @@ class Classroom
             // set the owning side to null (unless already changed)
             if ($measure->getClassroom() === $this) {
                 $measure->setClassroom(null);
+
+    public function removePublicMessage(PublicMessage $publicMessage): self
+    {
+        if ($this->publicMessages->contains($publicMessage)) {
+            $this->publicMessages->removeElement($publicMessage);
+            // set the owning side to null (unless already changed)
+            if ($publicMessage->getIdClasseEmeteur() === $this) {
+                $publicMessage->setIdClasseEmeteur(null);
             }
         }
 
         return $this;
     }
+
 
     /**
      * @return Collection|Publication[]

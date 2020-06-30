@@ -12,6 +12,6 @@ classroom:
   path: /classroom/{id}
   controller: App\Controller\ClassRoomController
 publication:
-  path: /publication/showAll
+  path: /publication/
   controller: App\Controller\PublicationController
 

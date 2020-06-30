@@ -15,8 +15,7 @@
             </tr>
         </thead>
         <tbody>
-
-        {% for publication in publications|sort((a, b) => a.title <=> b.title ) %}
+        {% for publication in publications|sort((a, b) => a.name <=> b.name) %}
             <tr>
                 <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a></td>
                 <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a></td>
@@ -33,5 +32,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('publication_new') }}">Créer un nouveau relevé </a>
 {% endblock %}

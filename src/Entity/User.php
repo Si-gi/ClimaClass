@@ -40,6 +40,7 @@ class User extends BaseUser
      */
     private $classroom;
 
+
     /**
      * Set establishment
      *
@@ -110,5 +111,6 @@ class User extends BaseUser
         return $this;
     }
 
+  
 
 }
