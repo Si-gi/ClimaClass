@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
             <style>
                 body{
+
                    }
                 .titleH3{
                     text-align:center !important;
@@ -56,7 +57,6 @@
                     float: none;
                     display: block;
                 }
-                }
                 .navnav{
                     height: 76px !important;
                     color: green !important;
@@ -67,6 +67,7 @@
                     font-weight: bold !important;
                     text-align: right !important;
                 }
+
                 .fa-home{
                     font-size:40px !important;
                 }
@@ -88,6 +89,31 @@
                 }
                 .navTog a{
                     margin-right: 28px;
+
+}
+                .newbtn{
+                  width: 180px;
+                  height: 50px;
+                  color: #fff !important;
+                  margin-left: 10px;
+                  text-transform: uppercase;
+                  text-decoration: none;
+                  background: #0baed6;
+                  padding: 5px;
+                  border-radius: 5px;
+                  display: inline-block;
+                  border: none;
+                  transition: all 0.4s ease 0s;
+                }
+                .newbtn:hover{
+                  background: #0baed6;
+				letter-spacing: 1px;
+				-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+				-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+				box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+				transition: all 0.4s ease 0s;
+				text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+
                 }
                 a{
                     color:black;
@@ -162,6 +188,7 @@
                 .releve_fond{
                     background-color: red !important;
                 }
+
             </style>
         {% endblock %}
 
@@ -175,6 +202,32 @@
     </div>
         <a href="#"><i class="fa fa-fw fa-user"></i><br> Login</a>
     </div>
+
+     <nav class="navbar navbar-expand-lg navbar-dark bg-primary barrenav">
+        <a class="navbar-brand titleclima" href="{{ path('homepage') }}">ClimaClass</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse navnav" id="navbarColor01">
+                <ul class="navbar-nav mr-auto navulbarre">
+                    <li class="nav-item">
+                        <i class="fa fa-comments-o" aria-hidden="true"><a class="nav-link" href="{{ path('search') }}">Search</a></i>
+                    </li>
+                <li class="nav-item">
+                  <i class="fa fa-comments-o" aria-hidden="true"><a class="nav-link" href="#">Messages</a></i>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('publication_index') }}">Relevés</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="{{ path('mesure') }}">Mesure</a>
+                </li>
+                </ul>
+                <li class="nav-item btnconnect">
+                    {# <a class="nav-link" href="#">Connexion</a> #}
+                </li>
+            </div>
+        </nav>
 
 
       {% block body %} {% endblock %}
