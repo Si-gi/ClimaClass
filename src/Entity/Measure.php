@@ -67,11 +67,6 @@ class Measure
      */
     private $rainMeasureDuration;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Publication", inversedBy="measures", cascade={"persist"})
-     * @ORM\JoinColumn(name="id_publication", referencedColumnName="id")
-     **/
-    private $publication;
 
     /**
      * @ORM\ManyToOne(targetEntity=Classroom::class, inversedBy="measures")

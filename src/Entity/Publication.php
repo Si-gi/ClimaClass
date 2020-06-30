@@ -37,16 +37,6 @@ class Publication
      */
     private $date;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Measure", mappedBy="report", cascade={"persist"})
-     **/
-    private $measures;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="publication")
-     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
-     **/
-    private $eleve;
 
     /**
      * @ORM\ManyToOne(targetEntity=Classroom::class, inversedBy="publications")
@@ -152,9 +142,10 @@ class Publication
      * @param User $eleve
      * @return Pulbicatoin
      */
-    public function setEleve($eleve){
-      $this->eleve = $eleve;
-      return $this;
+    public function setEleve($eleve)
+    {
+        $this->eleve = $eleve;
+        return $this;
     }
 
     public function getClassroom(): ?Classroom
