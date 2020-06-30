@@ -19,6 +19,23 @@ class PublicMessageRepository extends ServiceEntityRepository
         parent::__construct($registry, PublicMessage::class);
     }
 
+    /**
+     * @return array
+     */
+    public function getConv($receiver, $sender){
+        $entityManager = $this->getEntityManager();
+        $queryBuilder = $entityManager->
+        createQuery('SELECT p 
+                            FROM App\Entity\PublicMessage p
+                            WHERE p.receiver = :receiver AND p.sender = :sender 
+                            OR p.receiver= :sender AND p.sender = :receiver
+                            
+                            ')
+            ->setParameter('receiver', $receiver)
+            ->setParameter('sender', $sender);
+        return $queryBuilder->execute();
+    }
+
     // /**
     //  * @return PublicMessage[] Returns an array of PublicMessage objects
     //  */

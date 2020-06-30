@@ -1,0 +1,72 @@
+{% include "base.html.twig" %}
+{% block content %}
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script type="text/css">
+        #sidebar{
+            position:fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            border-left: #4c5367;
+        }
+
+    </script>
+
+    <div>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:20%">
+        <nav id="sidebar" >
+            <ul>
+                {% for contact in list_contact %}
+                    <li>
+                        <a href="{{ path("conversation" , {'contact': contact.idcontact.id }) }}" class="btn btn-warning">{{ contact.idContact }}</a>
+
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+    </div>
+    <div>
+
+    </div>
+    <div classe="w3-container w3-teal messagerie"  style="margin-left:25%;">
+        {% if messages is defined %}
+            <ul style="list-style: none">
+                {% for message in messages %}
+                    {% if message.sender == user %}
+
+                        <li style="text-align: right;" class="mymessage">{{ user }} ||{{ message.content }} </li>
+                    {% else %}
+                        <li style="text-align: left;" class="othermessage">{{ contact }}||{{ message.content }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12 blog-main">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="bg-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {% if form is defined %}
+                    {{ form_start(form) }}
+                    <div class="col-md-12">
+                        <div class="form-group col-md-4">
+                            {{ form_row(form.content) }}
+                        </div>
+                        <div class="form-group col-md-4 pull-right">
+                            {{ form_widget(form.submit) }}
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
