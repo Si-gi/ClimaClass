@@ -69,11 +69,6 @@ class Measure
 
 
     /**
-     * @ORM\ManyToOne(targetEntity=Classroom::class, inversedBy="measures")
-     */
-    private $classroom;
-
-    /**
      * @ORM\OneToOne(targetEntity=Publication::class, mappedBy="measure", cascade={"persist", "remove"})
      */
     private $publication;

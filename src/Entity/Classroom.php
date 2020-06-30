@@ -43,11 +43,6 @@ class Classroom
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Measure::class, mappedBy="classroom")
-     */
-    private $measures;
-
-    /**
      * @ORM\OneToMany(targetEntity=Publication::class, mappedBy="classroom")
      */
     private $publications;
@@ -57,7 +52,7 @@ class Classroom
         $this->users = new ArrayCollection();
         $this->measures = new ArrayCollection();
         $this->publications = new ArrayCollection();
-		$this->publicMessages = new ArrayCollection();
+        $this->publicMessages = new ArrayCollection();
     }
     public function __toString()
     {
@@ -109,19 +104,18 @@ class Classroom
     {
         $users = $this->getUsers();
 
-        foreach ($users as $user){
+        foreach ($users as $user) {
 
-            if($user->getRoles() == "ROLE_TEACHER" || $user->getRoles() == "ROLE_ADMIN" || $user->getRoles() == "ROLE_SUPER_ADMIN"){
+            if ($user->getRoles() == "ROLE_TEACHER" || $user->getRoles() == "ROLE_ADMIN" || $user->getRoles() == "ROLE_SUPER_ADMIN") {
                 return $user->getId();
-            }else{
+            } else {
                 $roles = $user->getRoles();
-                foreach ($roles as $role){
-                    if($role == "ROLE_TEACHER" || $role == "ROLE_ADMIN" || $role == "ROLE_SUPER_ADMIN"){
+                foreach ($roles as $role) {
+                    if ($role == "ROLE_TEACHER" || $role == "ROLE_ADMIN" || $role == "ROLE_SUPER_ADMIN") {
                         return $user->getId();
                     }
                 }
             }
-
         }
         return null;
     }
@@ -173,7 +167,7 @@ class Classroom
             $measure->setClassroom($this);
         }
     }
-	/*
+    /*
      * @return Collection|PublicMessage[]
      */
     public function getPublicMessages(): Collection
@@ -186,7 +180,6 @@ class Classroom
         if (!$this->publicMessages->contains($publicMessage)) {
             $this->publicMessages[] = $publicMessage;
             $publicMessage->setIdClasseEmeteur($this);
-
         }
 
         return $this;
