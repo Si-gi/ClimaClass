@@ -48,6 +48,11 @@ class Publication
      **/
     private $eleve;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Classroom::class, inversedBy="publications")
+     */
+    private $classroom;
+
     public function __construct()
     {
         $this->data = new ArrayCollection();
@@ -150,5 +155,17 @@ class Publication
     public function setEleve($eleve){
       $this->eleve = $eleve;
       return $this;
+    }
+
+    public function getClassroom(): ?Classroom
+    {
+        return $this->classroom;
+    }
+
+    public function setClassroom(?Classroom $classroom): self
+    {
+        $this->classroom = $classroom;
+
+        return $this;
     }
 }

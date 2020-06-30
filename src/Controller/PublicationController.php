@@ -27,7 +27,7 @@ class PublicationController extends AbstractController
 
         ]);
       }
-      if($role[0] == "ROLE_TEACHER"){
+      if($role[0] == "ROLE_TEACHER" || $role[0] == "ROLE_ADMIN"){
         return $this->render('publication/showAll.html.twig', [
             'publications' => $publicationRepository->findAll(),
         ]);
