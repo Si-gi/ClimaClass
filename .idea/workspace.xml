@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be4437e0-7ecf-46a8-8e66-2febbafc1602" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Contacts.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/PrivateMessageType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/ContactsRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/message/Contacts.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/message/Message.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/message/Message_form.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200624134514.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/PrivateMessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PrivateMessage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/PublicMessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PublicMessage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/PublicMessageType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PublicMessageType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PrivateMessageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PrivateMessageRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PublicMessageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PublicMessageRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

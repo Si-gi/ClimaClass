@@ -58,7 +58,7 @@ class DefaultController extends AbstractController
         $success = false;
 
         if(count($_GET) == 0){
-            $schools = null;
+            $schools_1 = null;
 
         }else{
             $schools_0 = $this->schoolRepository->findByQuery($_GET['state'],$_GET['city'],$_GET['name'],$_GET['latitude'],$_GET['longitude']);
@@ -71,6 +71,7 @@ class DefaultController extends AbstractController
                     $schools_1[] = $school;
                 }
             }else{
+                $schools_1 =
                 $this->addFlash('error', 'No results found');
             }
         }
