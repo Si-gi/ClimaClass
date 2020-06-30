@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\PublicMessage;
 use App\Form\PublicMessageType;
 use App\Repository\PublicMessageRepository;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class PublicMessageController extends AbstractController
      */
     public function index(PublicMessageRepository $publicMessageRepository): Response
     {
-      $messages = $publicMessageRepository->findMessageRecus(2);
+
       //dd($messages);
       $classId=2;
       $messageRecus=$publicMessageRepository->findBy(
@@ -28,11 +29,20 @@ class PublicMessageController extends AbstractController
       $messageEnvoye=$publicMessageRepository->findBy(
         ['idClasseEmeteur' => $classId]);
         return $this->render('public_message/index.html.twig', [
-            'messages_recus' => $messages,
+            'messages_recus' => $messageRecus,
+            'messages_envoyes' => $messageEnvoye,
 
         ]);
 
     }
+
+      /**
+       * @Route("/repondre/{id}", name="repondre", methods={"GET"})
+       */
+      public function repondre(PublicMessage $publicMessage): Response
+      {
+        dd($publicMessage->getContent());
+      }
 
     /**
      * @Route("/new", name="public_message_new", methods={"GET","POST"})
@@ -44,7 +54,9 @@ class PublicMessageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $nowDate= new \DateTime();
             $entityManager = $this->getDoctrine()->getManager();
+            $publicMessage->setDate($nowDate);
             $entityManager->persist($publicMessage);
             $entityManager->flush();
 

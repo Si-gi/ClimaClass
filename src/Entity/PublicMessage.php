@@ -37,6 +37,11 @@ class PublicMessage
      */
     private $idClasseDestinataire;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
     public function __construct()
     {
         $this->idClasseDestinataire = new ArrayCollection();
@@ -89,6 +94,18 @@ class PublicMessage
     public function setIdClasseDestinataire(?Classroom $idClasseDestinataire): self
     {
         $this->idClasseDestinataire = $idClasseDestinataire;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }
