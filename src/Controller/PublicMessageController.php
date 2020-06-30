@@ -20,10 +20,16 @@ class PublicMessageController extends AbstractController
      */
     public function index(PublicMessageRepository $publicMessageRepository): Response
     {
-      dd($this->getUser()->getClassroom());
-      //$messageRecus=$publicMessageRepository->findBy("idDestinataire = ")
+      $messages = $publicMessageRepository->findMessageRecus(2);
+      //dd($messages);
+      $classId=2;
+      $messageRecus=$publicMessageRepository->findBy(
+        ['idClasseDestinataire' => $classId]);
+      $messageEnvoye=$publicMessageRepository->findBy(
+        ['idClasseEmeteur' => $classId]);
         return $this->render('public_message/index.html.twig', [
-            'public_messages' => $publicMessageRepository->findAll(),
+            'messages_recus' => $messages,
+
         ]);
 
     }

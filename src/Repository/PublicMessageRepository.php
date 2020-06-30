@@ -47,5 +47,16 @@ class PublicMessageRepository extends ServiceEntityRepository
         ;
     }
     */
-    
+    public function findMessageRecus($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.idClasseEmeteur= :val OR p.idClasseDestinataire = :val ')
+            ->setParameter('val', $value)
+            ->groupBy('p.idClasseEmeteur')
+            ->addGroupBy('p.idClasseDestinataire')
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
