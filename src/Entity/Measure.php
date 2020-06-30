@@ -215,17 +215,6 @@ class Measure
         return $this->rainMeasureDuration;
     }
 
-    public function getClassroom(): ?Classroom
-    {
-        return $this->classroom;
-    }
-
-    public function setClassroom(?Classroom $classroom): self
-    {
-        $this->classroom = $classroom;
-
-        return $this;
-    }
 
     public function getPublication(): ?Publication
     {

@@ -152,21 +152,6 @@ class Classroom
         return $this;
     }
 
-    /**
-     * @return Collection|Measure[]
-     */
-    public function getMeasures(): Collection
-    {
-        return $this->measures;
-    }
-
-    public function addMeasure(Measure $measure): self
-    {
-        if (!$this->measures->contains($measure)) {
-            $this->measures[] = $measure;
-            $measure->setClassroom($this);
-        }
-    }
     /*
      * @return Collection|PublicMessage[]
      */
@@ -186,16 +171,6 @@ class Classroom
     }
 
 
-    public function removeMeasure(Measure $measure): self
-    {
-        if ($this->measures->contains($measure)) {
-            $this->measures->removeElement($measure);
-            // set the owning side to null (unless already changed)
-            if ($measure->getClassroom() === $this) {
-                $measure->setClassroom(null);
-            }
-        }
-    }
 
     public function removePublicMessage(PublicMessage $publicMessage): self
     {
