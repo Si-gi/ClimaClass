@@ -108,23 +108,7 @@ class Publication
         return $this->content;
     }
 
-    /**
-     * @return string
-     */
-    public function getEleve()
-    {
-        return $this->eleve;
-    }
 
-    /**
-     * @param User $eleve
-     * @return Pulbicatoin
-     */
-    public function setEleve($eleve)
-    {
-        $this->eleve = $eleve;
-        return $this;
-    }
 
     public function getClassroom(): ?Classroom
     {

@@ -3,27 +3,39 @@
 {% block title %}Publication{% endblock %}
 
 {% block body %}
+<a href="{{ path('publication_index') }}"><h6><i class="fa fa-arrow-circle-left"></i> retour aux relevés</h6></a>
 
     <table class="table">
         <tbody>
 
             <tr>
-                <th><h2>{{ publication.title }}</h2></th>
+                <th><h2>Titre : {{ publication.title }}</h2></th>
             </tr>
             <tr>
-                <th>Content</th>
+                <th>Description</th>
                 <td>{{ publication.content }}</td>
             </tr>
             <tr>
                 <th>Date</th>
                 <td>{{ publication.date ? publication.date|date('Y-m-d') : '' }}</td>
             </tr>
+            <tr>
+                <th>Classe</th>
+                <td>{{ publication.classroom}}</td>
+            </tr>
         </tbody>
     </table>
+    {% set maClasse = 0 %}
+  {% for classUser in app.user.classroom %}
+    {% if publication.classroom.id == classUser.id %}
+      {% set maClasse = maClasse + 1 %}
+    {% endif %}
+  {% endfor %}
 
-    <a href="{{ path('publication_index') }}">retour aux relevés</a>
-
-    <!--<a href="{#{ path('publication_edit', {'id': publication.id}) }#}">edit</a>
-
-    {#{ include('publication/_delete_form.html.twig') }#}
+    {% if is_granted('ROLE_ADMIN') or (is_granted('ROLE_TEACHER') and maClasse == 1 ) %}
+    <br></br>
+    <a href="{{ path('publication_edit', {'id': publication.id}) }}"><button class="newbtn"> edit </button></a>
+<br></br>
+    {{ include('publication/_delete_form.html.twig') }}
+  {% endif %}
 {% endblock %}

@@ -10,10 +10,12 @@ use App\Entity\PublicMessage;
 use App\Entity\School;
 use App\Entity\Classroom;
 use App\Form\PublicMessageType;
+use App\Repository\PublicationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -38,6 +40,24 @@ class ClassRoomController extends AbstractController
         $this->schoolRepository = $entityManager->getRepository(School::class);
         $this->classRoomRepository = $entityManager->getRepository(Classroom::class);
         $this->publicMessageRepository = $entityManager->getRepository(PublicMessage::class);
+    }
+    /**
+     * @Route("profil/{id}", name="classroom_profil")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function classroom(Request $request, PublicationRepository $publicationRepository,PaginatorInterface $paginator, $id){
+
+        $classroom = $this->classRoomRepository->find($id);
+        $donnees = $publicationRepository->findBy(['classroom' => $id],);
+        $publications = $paginator->paginate($donnees,$request->query->getInt('page', 1),4);
+        return $this->render('classroom/show.html.twig', [
+            'class'=> $classroom,
+            'publications' => $publications
+
+          ]);
+
+
     }
 
     /**
