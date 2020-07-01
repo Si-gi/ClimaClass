@@ -29,3 +29,6 @@ classroom_conversation:
 classroom_profil:
   path: /classroom_profil/{id}
   controller: App\Controller\ClassroomController::classroom
+new_publication:
+  path: /teacher/new_publication
+  controller: App\Controller\TeacherController::add_publication
