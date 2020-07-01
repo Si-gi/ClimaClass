@@ -2,7 +2,8 @@
 
 {% block body %}
     {% for message in messages %}
-        <div>
+        <div class="">
+            {{ message.sender }} to {{ message.receiver }}
             {{ message.content }}
         </div>
     {% endfor %}
