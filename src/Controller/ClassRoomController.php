@@ -42,7 +42,7 @@ class ClassRoomController extends AbstractController
         $this->publicMessageRepository = $entityManager->getRepository(PublicMessage::class);
     }
     /**
-     * @Route("profil/{id}", name="classroom_profil")
+     * @Route("/classroomProfil/{id}", name="classroom_profil")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */

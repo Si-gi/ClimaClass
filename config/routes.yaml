@@ -27,8 +27,8 @@ classroom_conversation:
   path: classroom/{classroom_contact_a}/{classroom_contact_b}
   controller: App\Controller\ClassRoomController::seeMessages
 classroom_profil:
-  path: /classroom_profil/{id}
-  controller: App\Controller\ClassroomController::classroom
+  path: /classroomProfil/{id}
+  controller: App\Controller\ClassRoomController::classroom
 new_publication:
   path: /teacher/new_publication
   controller: App\Controller\TeacherController::add_publication
