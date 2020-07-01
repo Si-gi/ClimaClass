@@ -27,7 +27,7 @@ class ClassRoomController extends AbstractController
         $this->classRoomRepository = $entityManager->getRepository(Classroom::class);
     }
     /**
-     * @Route("/classroom/{id}", name="classroom_id")
+     * @Route("/classroom/profil/{id}", name="classroom_profil")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
