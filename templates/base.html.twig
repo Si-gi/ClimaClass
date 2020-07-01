@@ -12,9 +12,10 @@
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+         {# Mesure graphique - mesure  #}
+        <link href="cssMesure/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
             <style>
                 body{
-
                    }
                 .titleH3{
                     text-align:center !important;
@@ -90,7 +91,7 @@
                 .navTog a{
                     margin-right: 28px;
 
-}
+                }
                 .newbtn{
                   width: 180px;
                   height: 50px;
@@ -196,14 +197,13 @@
     <div class="navbar">
         <a class="active" href="{{ path('homepage') }}"><i class="fa fa-fw fa-home"></i><br> Climaclass</a>
     <div class="navTog">
-        <a class="" href="{{ path('search') }}"><i class="fa fa-fw fa-search"></i><br>Search<br></a>
         <a class="menuR"href="#"><i class="fa fa-fw fa-envelope"></i><br> Messages</a>
         <a href="{{ path('publication_index') }}"><i class="fa fa-fw fa-address-card"></i><br> Relevés</a>
         <a href="{{ path('mesure') }}"><i class="fa fa-fw fa-thermometer-full"></i><br> Mesure</a>
     </div>
         <a href="#"><i class="fa fa-fw fa-user"></i><br> Login</a>
     </div>
-<!--
+
      <nav class="navbar navbar-expand-lg navbar-dark bg-primary barrenav">
         <a class="navbar-brand titleclima" href="{{ path('homepage') }}">ClimaClass</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -212,7 +212,7 @@
             <div class="collapse navbar-collapse navnav" id="navbarColor01">
                 <ul class="navbar-nav mr-auto navulbarre">
                     <li class="nav-item">
-
+                        <i class="fa fa-comments-o" aria-hidden="true"><a class="nav-link" href="{{ path('search') }}">Search</a></i>
                     </li>
                 <li class="nav-item">
                   <i class="fa fa-comments-o" aria-hidden="true"><a class="nav-link" href="#">Messages</a></i>
@@ -229,7 +229,7 @@
                 </li>
             </div>
         </nav>
--->
+
 
       {% block body %} {% endblock %}
 
