@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PublicMessage{% endblock %}
+
+{% block body %}
+    <h1>Create new PublicMessage</h1>
+
+    {{ include('public_message/_form.html.twig') }}
+
+    <a href="{{ path('public_message_index') }}">back to list</a>
+{% endblock %}

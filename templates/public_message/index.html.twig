@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PublicMessage index{% endblock %}
+
+{% block body %}
+    <h1>PublicMessage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Content</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for public_message in public_messages %}
+            <tr>
+                <td>{{ public_message.id }}</td>
+                <td>{{ public_message.content }}</td>
+                <td>
+                    <a href="{{ path('public_message_show', {'id': public_message.id}) }}">show</a>
+                    <a href="{{ path('public_message_edit', {'id': public_message.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('public_message_new') }}">Create new</a>
+{% endblock %}

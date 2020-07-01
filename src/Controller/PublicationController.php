@@ -21,18 +21,13 @@ class PublicationController extends AbstractController
      */
     public function index(PublicationRepository $publicationRepository): Response
     {
-      $role=$this->getUser()->getRoles();
-
-      if($role[0] == "ROLE_TEACHER" || $role[0] == "ROLE_ADMIN"){
+      
         return $this->render('publication/showAll.html.twig', [
             'publications' => $publicationRepository->findAll(),
         ]);
-      }
-      else {
-        return $this->render('publication/index.html.twig', [
-            'publications' => $publicationRepository->findAll(),
-        ]);
-      }
+
+
+
     }
 
 
@@ -72,12 +67,21 @@ class PublicationController extends AbstractController
     /**
      * @Route("/class/{id}", name="publication_classe", methods={"GET"})
      */
-    public function showforClass(Classroom $class): Response
+    public function showforClass(Classroom $class,PublicationRepository $publicationRepository,$id): Response
     {
-      dd($class);
-        // return $this->render('publication/show.html.twig', [
-        //     'publication' => $publication,
-        // ]);
+      $role=$this->getUser()->getRoles();
+
+      $publicationClass=$publicationRepository->findBy(['classroom' => $id]);
+      if($role[0] == "ROLE_TEACHER" || $role[0] == "ROLE_ADMIN"){
+        return $this->render('publication/showAll.html.twig', [
+            'publications' => $publicationClass,
+        ]);
+      }
+      else {
+        return $this->render('publication/showAllEleve.html.twig', [
+            'publications' => $publicationClass,
+        ]);
+      }
     }
 
 

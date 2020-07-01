@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Content</th>
                 <th>Date</th>
@@ -16,24 +15,21 @@
             </tr>
         </thead>
         <tbody>
-        {% for publication in publications %}
+        {% for publication in publications|sort((a, b) => a.date <=> b.date) %}
             <tr>
-                <td>{{ publication.id }}</td>
-                <td>{{ publication.title }}</td>
-                <td>{{ publication.content }}</td>
+                <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a></td>
+                <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a></td>
                 <td>{{ publication.date ? publication.date|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('publication_show', {'id': publication.id}) }}">show</a>
-                    <a href="{{ path('publication_edit', {'id': publication.id}) }}">edit</a>
+                    <a href="{{ path('publication_show', {'id': publication.id}) }}">voir le relevé</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">pas de relevé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('publication_new') }}">Create new</a>
 {% endblock %}

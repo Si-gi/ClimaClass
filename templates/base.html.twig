@@ -4,13 +4,106 @@
         <meta charset="UTF-8">
         <title>{% block title %}ClimaClass{% endblock %}</title>
         {% block stylesheets %}
+        <link href="css/bootstrap.css" rel="stylesheet" />
+        <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
+        <link href="css/ct-navbar.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
             <style>
                 body{
-                    background: rgb(255,255,255) !important;
-                    background: linear-gradient(356deg, rgba(255,255,255,1) 0%, rgba(125,255,186,1) 56%) !important;
+                   }
+                .titleH3{
+                    text-align:center !important;
+                    margin-top:90px !important;
+                    font-weight: 700;
+                    text-transform:uppercase !important;
+                }
+                /* Style the navigation bar */
+                .navbar {
+                width: 100%;
+                background-color: green;
+                overflow: auto;
+                }
+                /* Navbar links */
+                .navbar a {
+                float: left;
+                text-align: center;
+                padding: 12px;
+                color: white;
+                text-decoration: none;
+                font-size: 17px;
+                }
+                .newbtn{
+                 width: 180px;
+                 height: 50px;
+                 color: #fff !important;
+                 margin-left: 10px;
+                 text-transform: uppercase;
+                 text-decoration: none;
+                 background: #008000;
+                 padding: 5px;
+                 border-radius: 5px;
+                 display: inline-block;
+                 border: none;
+                 transition: all 0.4s ease 0s;
+               }
+               .newbtn:hover{
+                 background: #008000;
+                 letter-spacing: 1px;
+                 -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+                 -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+                 box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+                 transition: all 0.4s ease 0s;
+                 text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+               }
+               .deletebtn{
+                width: 180px;
+                height: 50px;
+                color: #fff !important;
+                margin-left: 10px;
+                text-transform: uppercase;
+                text-decoration: none;
+                background: #ff4d40;
+                padding: 5px;
+                border-radius: 5px;
+                display: inline-block;
+                border: none;
+                transition: all 0.4s ease 0s;
+              }
+              .deletebtn:hover{
+                background: #ff4d40;
+                letter-spacing: 1px;
+                -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+                -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+                box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+                transition: all 0.4s ease 0s;
+                text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+              }
+                .tabPublication{
+                  margin-bottom: 15px;
+                  border-color: #008000;
+                  border-width: 1.5px;
+                  border-style: solid;
+                  border-radius:8px;
+                }
+                /* Navbar links on mouse-over */
+                .navbar a:hover {
+                    border: 4px solid #4CAF52;
+                    border-radius: 10px;
+                }
+                /* Current/active navbar link */
+                .active {
+                border: 4px solid #4CAF52;
+                border-radius: 10px;
+                }
+                /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+                @media screen and (max-width: 500px) {
+                .navbar a {
+                    float: none;
+                    display: block;
+                }
                 }
                 .navnav{
                     height: 76px !important;
@@ -22,8 +115,23 @@
                     font-weight: bold !important;
                     text-align: right !important;
                 }
+                .fa-home{
+                    font-size:40px !important;
+                }
+                .fa-address-card{
+                    font-size:40px !important;
+                }
+                .fa-envelope{
+                    font-size:40px !important;
+                }
+                .fa-thermometer-full{
+                    font-size:40px !important;
+                }
+                .fa-user{
+                    font-size:40px !important;
+                }
                 a{
-                    color:green;
+                    color:black;
                 }
                 .titleclima{
                     color:black !important;
@@ -92,33 +200,22 @@
                     position:relative;
                     top:1px;
                 }
-
+                .releve_fond{
+                    background-color: red !important;
+                }
             </style>
         {% endblock %}
 
     </head>
+    <div class="navbar">
+        <a class="active" href="{{ path('homepage') }}"><i class="fa fa-fw fa-home"></i><br> Climaclass</a>
+        <a class="menuR"href="#"><i class="fa fa-fw fa-envelope"></i><br> Messages</a>
+        <a href="{{ path('publication_index') }}"><i class="fa fa-fw fa-address-card"></i><br> Relevés</a>
+        <a href="{{ path('mesure') }}"><i class="fa fa-fw fa-thermometer-full"></i><br> Mesure</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i><br> Login</a>
+    </div>
 
-
-     <nav class="navbar navbar-expand-lg navbar-dark bg-primary barrenav">
-        <a class="navbar-brand titleclima" href="{{ path('homepage') }}">ClimaClass</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse navnav" id="navbarColor01">
-                <ul class="navbar-nav mr-auto navulbarre">
-                <li class="nav-item">
-                  <i class="fa fa-comments-o" aria-hidden="true"><a class="nav-link" href="#">Messages</a></i>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('publication_index') }}">Relevés</a>
-                </li>
-                </ul>
-                <li class="nav-item btnconnect">
-                    <a class="nav-link" href="#">Connexion</a>
-                </li>
-            </div>
-        </nav>
 
       {% block body %} {% endblock %}
 
-        {% block javascripts %}{% endblock %}
+      {% block javascripts %}{% endblock %}

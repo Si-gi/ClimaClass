@@ -3,35 +3,27 @@
 {% block title %}Publication index{% endblock %}
 
 {% block body %}
-    <h1>Publication index</h1>
+    <h3 class="titleH3">Relevés</h3>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Date</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for publication in publications %}
-            <tr>
-                <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a></td>
-                <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a></td>
-                <td>{{ publication.date ? publication.date|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('publication_show', {'id': publication.id}) }}">voir le relevé</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">pas de relevé</td>
-            </tr>
+
+
+        {% for publication in publications|sort((a, b) => a.title <=> b.title ) %}
+            <div class="container ">
+            <div class="card tabPublication">
+            <h3 class="card-title" style="text-align:center;">  <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a> </h3>
+              <div class="card-body">
+              <p>{{publication.classroom}}</p>
+              <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a>
+              <br></br>
+              <hr></hr>
+              <h6 class="card-subtitle mb-2 text-muted">{{ publication.date ? publication.date|date('Y-m-d') : '' }}</h6>
+              <a href="{{ path('publication_show', {'id': publication.id}) }}" style="text-align:right;"><button class="newbtn">voir le relevé</button> </a>
+              </div>
+            </div>
+            </div>
+
         {% endfor %}
-        </tbody>
-    </table>
+
 
     <a href="{{ path('publication_new') }}">Créer un nouveau relevé </a>
-    <h2>{{ app.user.roles[0] }}</h2>
 {% endblock %}

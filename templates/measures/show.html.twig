@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publication{% endblock %}
+
+{% block body %}
+
+<table class="table table-striped table-bordered table-hover" >
+    <tbody>
+    {% for measure in measures %}
+        <tr>
+            <td> {{ measure.temperature }}</td>
+            <td>{{ measure.windSpeed }}</td>
+            <td>{{ measure.windDirection }}</td>
+            <td>{{ measure.rainLevel }}</td>
+            <td>{{ measure.rainMeasureDuration }}</td>
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+<!--<a href="{#{ path('publication_edit', {'id': publication.id}) }#}">edit</a>
+
+    {#{ include('publication/_delete_form.html.twig') }#}
+{% endblock %}
