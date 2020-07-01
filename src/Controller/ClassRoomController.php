@@ -66,8 +66,8 @@ class ClassRoomController extends AbstractController
      */
     public function sendMessage(Request $request, $classReceiver){
 
-        if($this->getUser()->getRoles() != "ROLE_TEACHER"){
-            $this->redirectToRoute("classroom_messages");
+        if($this->getUser()->getRoles() != "ROLE_TEACHER" ||$this->getUser()->getRoles() != "ROLE_ADMIN"|| $this->getUser()->getRoles() != "ROLE_SUPER_ADMIN"){
+            $this->redirectToRoute("classroom_messages", array("classroom_id" => $this->getUser()->getClassroom()[0]));
         }
         $classReceiver = $this->classRoomRepository->findOneById($classReceiver);
 
@@ -88,7 +88,8 @@ class ClassRoomController extends AbstractController
             $this->entityManager->flush();
 
             $this->addFlash('success', 'Message envoyé');
-            //return $this->redirectToRoute('conversation',array("contact" => $receiver));
+            return $this->redirectToRoute('classroom_conversation',array("classroom_contact_a" => $message->getSender()->getId(),
+                "classroom_contact_b" =>  $message->getReceiver()->getId()));
         }
 
         return $this->render('/public_message/message_Form.html.twig', [
