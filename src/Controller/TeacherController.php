@@ -81,8 +81,6 @@ class TeacherController extends AbstractController
                 $filer->setName($newNameFile);
                 $filer->setMimeType($extension);
                 $filer->setFileSize($fileSize);
-                $date = new \DateTime();
-                $filer->setMeasurementDate($date);
                 $entityManagerInterface->persist($filer);
                 $publicationCreated->addFile($filer);
             }
