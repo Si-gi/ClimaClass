@@ -19,7 +19,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
  * Class ClassRoomController
  * @package App\Controller
- * @Route("classroom/")
  */
 class ClassRoomController extends AbstractController
 {
@@ -39,15 +38,6 @@ class ClassRoomController extends AbstractController
         $this->schoolRepository = $entityManager->getRepository(School::class);
         $this->classRoomRepository = $entityManager->getRepository(Classroom::class);
         $this->publicMessageRepository = $entityManager->getRepository(PublicMessage::class);
-    }
-    /**
-     * @Route("/classroom/{id}", name="classroom_id")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function classroom(Request $request, $id){
-
-        $classroom = $this->classRoomRepository->findOneById($id);
     }
 
     /**
@@ -87,29 +77,34 @@ class ClassRoomController extends AbstractController
     }
 
     /**
-     * @Route("classroom/{classroom_contact}", name="classroom_conversation")
+     * @Route("classroom/{classroom_contact_a}/{classroom_contact_b}", name="classroom_conversation")
      */
-    public function seeMessages(Request $request, $classroom_contact){
+    public function seeMessages(Request $request, $classroom_contact_a,$classroom_contact_b){
 
 
-        //$userSender = $this->UserRepository->findOneByUsername($user->getUserName());
-        $contacts = $this->ContactsRepository->findByIdUser($user->getId());
-        $receiver = $this->UserRepository->findOneById($classroom_contact);
-        $messages = $this->privateMessageRepository->getConv($receiver->getId(), $user->getId());
+        $classroom_user = $this->getUser()->getClassroom()[0];
+        $classReceiver = $this->classRoomRepository->findOneById($classroom_contact_b);
+        $classSender = $this->classRoomRepository->findOneById($classroom_contact_a);
+        $messages = $this->publicMessageRepository->getConv($classroom_contact_a, $classroom_contact_b);
 
-        $messages = $this->privateMessageRepository->findBy(
-            [
-                'receiver' => $receiver,
-                'sender' =>$user
-            ]
-        );
-
-        return $this->render('private_message/Message.html.twig',[
+        return $this->render('public_message/message_class.html.twig',[
             "messages" => $messages,
-            "user" => $userSender,
+            "classSender" => $classSender,
+            "classReceiver" => $classReceiver
         ]);
     }
 
+    /**
+     * @Route("mymessages/", name="mymessage")
+     */
+    public function myMessages(){
+
+        if($this->getUser()->getRoles() != "ROLES_TEACHER"){
+            $classroom = $this->getUser()->getClassroom()[0];
+          return  $this->redirectToRoute("classroom_messages", ['classroom_id' => $classroom->getId()]);
+        }
+
+    }
     /**
      * @Route("classroom_messages/{classroom_id}", name="classroom_messages")
      */
@@ -118,14 +113,7 @@ class ClassRoomController extends AbstractController
 
 
         $classroom = $this->publicMessageRepository->findOneById($classroom_id);
-
-        $messages = $this->publicMessageRepository->findBy(
-            [
-                'receiver' => $classroom_id,
-                'sender' =>$classroom_id
-            ]
-        );
-        $messages = $this->publicMessageRepository->getConv($classroom_id);
+        $messages = $this->publicMessageRepository->getAllConv($classroom_id);
         return $this->render('public_message/allMessages.html.twig',[
             "messages" => $messages,
             "classroom" => $classroom,
