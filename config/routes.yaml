@@ -20,4 +20,6 @@ messages_form:
 class_message:
   path: /teacher/class/{classReceiver}
   controller: App\Controller\ClassRoomController::sendMessage
-
+classroom_messages:
+  path: classroom_messages/{classroom_id}
+  controller: App\Controller\ClassRoomController::seeAllMessages

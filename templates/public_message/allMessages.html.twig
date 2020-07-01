@@ -1,0 +1,10 @@
+{% include "base.html.twig" %}
+
+{% block body %}
+    {% for message in messages %}
+        <div>
+            {{ message.content }}
+        </div>
+    {% endfor %}
+
+{% endblock %}

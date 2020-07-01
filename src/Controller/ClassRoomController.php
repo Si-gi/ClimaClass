@@ -56,7 +56,9 @@ class ClassRoomController extends AbstractController
      */
     public function sendMessage(Request $request, $classReceiver){
 
-
+        if($this->getUser()->getRoles() != "ROLE_TEACHER"){
+            $this->redirectToRoute("classroom_messages");
+        }
         $classReceiver = $this->classRoomRepository->findOneById($classReceiver);
 
 
@@ -81,6 +83,52 @@ class ClassRoomController extends AbstractController
 
         return $this->render('/public_message/message_Form.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("classroom/{classroom_contact}", name="classroom_conversation")
+     */
+    public function seeMessages(Request $request, $classroom_contact){
+
+
+        //$userSender = $this->UserRepository->findOneByUsername($user->getUserName());
+        $contacts = $this->ContactsRepository->findByIdUser($user->getId());
+        $receiver = $this->UserRepository->findOneById($classroom_contact);
+        $messages = $this->privateMessageRepository->getConv($receiver->getId(), $user->getId());
+
+        $messages = $this->privateMessageRepository->findBy(
+            [
+                'receiver' => $receiver,
+                'sender' =>$user
+            ]
+        );
+
+        return $this->render('private_message/Message.html.twig',[
+            "messages" => $messages,
+            "user" => $userSender,
+        ]);
+    }
+
+    /**
+     * @Route("classroom_messages/{classroom_id}", name="classroom_messages")
+     */
+    public function seeAllMessages(Request $request, $classroom_id){
+
+
+
+        $classroom = $this->publicMessageRepository->findOneById($classroom_id);
+
+        $messages = $this->publicMessageRepository->findBy(
+            [
+                'receiver' => $classroom_id,
+                'sender' =>$classroom_id
+            ]
+        );
+        $messages = $this->publicMessageRepository->getConv($classroom_id);
+        return $this->render('public_message/allMessages.html.twig',[
+            "messages" => $messages,
+            "classroom" => $classroom,
         ]);
     }
 }
