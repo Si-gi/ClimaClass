@@ -26,3 +26,6 @@ mymessages:
 classroom_conversation:
   path: classroom/{classroom_contact_a}/{classroom_contact_b}
   controller: App\Controller\ClassRoomController::seeMessages
+classroom_profil:
+  path: /profil/{id}
+  controller: App\Controller\ClassroomController::classroom

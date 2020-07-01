@@ -57,16 +57,21 @@
                                    <td>{{classroom}}</td>
                                    <td>
 
-{#                                       <a href="{{ path('class_message',{'receiver': classroom.id}) }}" id="{{ classroom.id }}">#}
-{#                                           voir classe#}
-{#                                       </a>#}
+{#                                       //<a href="{{ path('class_message',{'classReceiver': classroom.id}) }}" id="{{ classroom.id }}">
+#}                                      <a href="{{ path("classroom_profil", {'id': classroom.id}) }}">
+                                       voir classe
+                                       </a>
                                    </td>
                                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
-{#                                   <td>#}
-{#                                       <a href="{{ path('messages_form', {'receiver': classroom.getTeacher()}) }}" id="{{ classroom.getTeacher() }}">#}
-{#                                           Contacter prof#}
-{#                                       </a>#}
-{#                                   </td>#}
+                                   <td>
+                                       {% if classroom.getTeacher() == "" %}
+                                           There is no teacher
+                                           {% else %}
+                                               <a href="{{ path('messages_form', {'receiver': classroom.getTeacher()}) }}" id="{{ classroom.getTeacher() }}">
+                                                   Contacter prof
+                                               </a>
+                                      {% endif %}
+                                   </td>
                                    {% endif %}
 
                                </tr>
