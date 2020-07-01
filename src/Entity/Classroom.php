@@ -228,4 +228,15 @@ class Classroom
         }
         return $array;
     }
+
+    public function getDateStart()
+    {
+        return $this->getMeasures()[0]->getMeasurementDate();
+    }
+
+    public function getDateEnd()
+    {
+        $size = count($this->getMeasures());
+        return $this->getMeasures()[$size - 1]->getMeasurementDate();
+    }
 }

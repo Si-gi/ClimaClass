@@ -2,6 +2,7 @@
 
 
 namespace App\Controller;
+
 use App\Entity\Classroom;
 use App\Entity\Measure;
 use App\Entity\School;
@@ -42,7 +43,8 @@ class MeasureController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      */
 
-    public function measureForm(Request $request, int $id_classroom){
+    public function measureForm(Request $request, int $id_classroom)
+    {
         $measures = new Measure();
         $form = $this->createForm(MeasureFormType::class, $measures);
         $form->handleRequest($request);
@@ -52,7 +54,7 @@ class MeasureController extends AbstractController
 
             $date = new \DateTime();
             $measures->setMeasurementDate($date);
-            $classroom= $this->classRoomRepository->findOneById($id_classroom);
+            $classroom = $this->classRoomRepository->findOneById($id_classroom);
             $measures->setClassroom($classroom);
 
             $this->entityManager->persist($measures);
@@ -73,7 +75,8 @@ class MeasureController extends AbstractController
      * @param $id_classroom
      * @Route("/measures/{id_classroom}", name="show_measures")
      */
-    public function showMeasures(Request $request,$id_classroom){
+    public function showMeasures(Request $request, $id_classroom)
+    {
         $classroom = $this->classRoomRepository->findOneById($id_classroom);
         $measures = $classroom->getMeasures();
 
