@@ -14,6 +14,9 @@ publication:
 messages_form:
   path: /teacher/messages/{receiver}
   controller: App\Controller\UserController::sendMessage
+conversation:
+    path: /teacher/conversation/{contact}
+    controller: App\Controller\UserController::seeMessages
 class_message:
   path: /teacher/class/{classReceiver}
   controller: App\Controller\ClassRoomController::sendMessage
@@ -32,3 +35,6 @@ classroom_profil:
 new_publication:
   path: /teacher/new_publication
   controller: App\Controller\TeacherController::add_publication
+contacts:
+  path: /teacher/contacts
+  controller: App\Controller\UserController::seeContact
