@@ -67,16 +67,11 @@ class Measure
      */
     private $rainMeasureDuration;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Publication", inversedBy="measures", cascade={"persist"})
-     * @ORM\JoinColumn(name="id_publication", referencedColumnName="id")
-     **/
-    private $publication;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Classroom::class, inversedBy="measures")
+     * @ORM\OneToOne(targetEntity=Publication::class, mappedBy="measure", cascade={"persist", "remove"})
      */
-    private $classroom;
+    private $publication;
 
     /**
      * @return integer
@@ -220,14 +215,21 @@ class Measure
         return $this->rainMeasureDuration;
     }
 
-    public function getClassroom(): ?Classroom
+
+    public function getPublication(): ?Publication
     {
-        return $this->classroom;
+        return $this->publication;
     }
 
-    public function setClassroom(?Classroom $classroom): self
+    public function setPublication(?Publication $publication): self
     {
-        $this->classroom = $classroom;
+        $this->publication = $publication;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newMeasure = null === $publication ? null : $this;
+        if ($publication->getMeasure() !== $newMeasure) {
+            $publication->setMeasure($newMeasure);
+        }
 
         return $this;
     }

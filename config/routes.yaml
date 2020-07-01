@@ -14,4 +14,12 @@ classroom:
 publication:
   path: /publication/
   controller: App\Controller\PublicationController
-
+messages_form:
+  path: /teacher/messages/{receiver}
+  controller: App\Controller\UserController::sendMessage
+class_message:
+  path: /teacher/class/{classReceiver}
+  controller: App\Controller\ClassRoomController::sendMessage
+classroom_messages:
+  path: classroom_messages/{classroom_id}
+  controller: App\Controller\ClassRoomController::seeAllMessages

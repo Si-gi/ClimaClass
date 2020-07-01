@@ -37,16 +37,16 @@ class Publication
      */
     private $date;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Measure", mappedBy="report", cascade={"persist"})
-     **/
-    private $measures;
-
 
     /**
      * @ORM\ManyToOne(targetEntity=Classroom::class, inversedBy="publications")
      */
     private $classroom;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Measure::class, inversedBy="publication", cascade={"persist", "remove"})
+     */
+    private $measure;
 
     public function __construct()
     {
@@ -68,33 +68,6 @@ class Publication
         $this->date = $date;
 
         return $this;
-    }
-    /**
-     * @param Measure $measures
-     * @return Publication
-     */
-    public function addMeasure(Measure $measures)
-    {
-        $this->measures->add($measures);
-        $measures->setReport($this);
-        return $this;
-    }
-
-    /**
-     * $measures
-     */
-    public function removeMeasure(Measure $measures)
-    {
-        $this->measures->removeElement($measures);
-        $measures->setReport(null);
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getMeasures()
-    {
-        return $this->measures;
     }
 
     /**
@@ -145,6 +118,18 @@ class Publication
     public function setClassroom(?Classroom $classroom): self
     {
         $this->classroom = $classroom;
+
+        return $this;
+    }
+
+    public function getMeasure(): ?Measure
+    {
+        return $this->measure;
+    }
+
+    public function setMeasure(?Measure $measure): self
+    {
+        $this->measure = $measure;
 
         return $this;
     }

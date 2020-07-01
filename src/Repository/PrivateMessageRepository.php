@@ -19,32 +19,21 @@ class PrivateMessageRepository extends ServiceEntityRepository
         parent::__construct($registry, PrivateMessage::class);
     }
 
-    // /**
-    //  * @return PrivateMessage[] Returns an array of PrivateMessage objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?PrivateMessage
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+    /**
+     * @return array
+     */
+    public function getConv($receiver, $sender){
+        $entityManager = $this->getEntityManager();
+        $queryBuilder = $entityManager->
+        createQuery('SELECT p 
+                            FROM App\Entity\PrivateMessage p
+                            WHERE p.receiver = :receiver AND p.sender = :sender 
+                            OR p.receiver= :sender AND p.sender = :receiver
+                            ')
+            ->setParameter('receiver', $receiver)
+            ->setParameter('sender', $sender);
+        return $queryBuilder->execute();
     }
-    */
+
 }

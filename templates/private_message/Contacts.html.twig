@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+{% block content %}
+
+<script type="text/css">
+    #sidebar{
+        position:fixed;
+        padding-left: 0%;
+        margin-left: 80%;
+        padding-right: 0%;
+        top: 0;
+        bottom: 0;
+    }
+</script>
+<nav id="sidebar" >
+    <ul>
+        {% for contact in contacts %}
+            <li>
+                <a href="{{ path("conversation" , {'contact': contact.idcontact }) }}" class="btn btn-warning">{{ contact.idContact }}</a>
+
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+<div>
+
+</div>
+
+{% endblock %}

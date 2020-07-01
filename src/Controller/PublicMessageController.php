@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\PublicMessage;
 use App\Form\PublicMessageType;
 use App\Repository\PublicMessageRepository;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +21,31 @@ class PublicMessageController extends AbstractController
      */
     public function index(PublicMessageRepository $publicMessageRepository): Response
     {
-      dd($this->getUser()->getClassroom());
-      //$messageRecus=$publicMessageRepository->findBy("idDestinataire = ")
+
+      //dd($messages);
+      $classId=2;
+      $messageRecus=$publicMessageRepository->findBy(
+        ['idClasseDestinataire' => $classId]);
+      $messageEnvoye=$publicMessageRepository->findBy(
+        ['idClasseEmeteur' => $classId]);
         return $this->render('public_message/index.html.twig', [
-            'public_messages' => $publicMessageRepository->findAll(),
+            'messages_recus' => $messageRecus,
+            'messages_envoyes' => $messageEnvoye,
+
         ]);
 
     }
 
+      /**
+       * @Route("/repondre/{id}", name="repondre", methods={"GET"})
+       */
+      public function repondre(PublicMessage $publicMessage): Response
+      {
+        dd($publicMessage->getContent());
+      }
+
     /**
-     * @Route("/new", name="public_message_new", methods={"GET","POST"})
+     * @Route("/new/{idEmeteur}/{idDestinataire}", name="public_message_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -38,7 +54,9 @@ class PublicMessageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $nowDate= new \DateTime();
             $entityManager = $this->getDoctrine()->getManager();
+            $publicMessage->setDate($nowDate);
             $entityManager->persist($publicMessage);
             $entityManager->flush();
 

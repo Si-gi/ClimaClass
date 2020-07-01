@@ -2,33 +2,18 @@
 
 namespace App\Form;
 
-use App\Repository\ClassRoomRepository;
-use App\Repository\UserRepository;
-use App\Entity\PublicMessage;
-use App\Entity\Classroom;
+use App\Entity\PrivateMessage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class PublicMessageType extends AbstractType
+class PrivateMessageType extends AbstractType
 {
-    private $classRoomRepository;
-    public function __construct(ClassRoomRepository $classRoomRepository)
-    {
-        $this->classRoomRepository = $classRoomRepository;
-    }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('content', TextareaType::class)
-            ->add('sender', EntityType::class,
-            ['class' => Classroom::class,
-                'choices' => $options['classroom']
-                ]
-            )
             ->add('submit', SubmitType::class,
                 [
                     'attr' => ['class' => 'form-control btn-primary pull-right'],
@@ -40,8 +25,8 @@ class PublicMessageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => PublicMessage::class,
-            'classroom' => array()
+            'data_class' => PrivateMessage::class,
         ]);
     }
 }
+?>

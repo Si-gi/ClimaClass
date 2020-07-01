@@ -51,20 +51,24 @@
                                <td>{{ school['State'] }} </td>
                                <td>{{ school['city'] }}</td>
                                <td>{{ school['Name'] }}</td>
-                               <td> <button class="btn btn-primary" onclick="showClass({{ school['id'] }})"><i  class="fa fa-save"></i></button></td>
+                               <td> <button class="btn btn-primary" onclick="showClass({{ school['id'] }})"><i  class="fa fa-plus"></i></button></td>
                            {% for classroom in school['classrooms'] %}
                                <tr class="classroom-default class-{{ school['id'] }}">
                                    <td>{{classroom}}</td>
                                    <td>
 
-                                       <a  href ="{{ path('publications_show', {'id': school['id']}) }}">
-                                           Voir la classe
+                                       <a href="{{ path('class_message',{'receiver': classroom.id}) }}" id="{{ classroom.id }}">
+                                           voir classe
                                        </a>
                                    </td>
+                                   {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
                                    <td>
-                                       Contacter prof
+                                       <a href="{{ path('messages_form', {'receiver': classroom.getTeacher()}) }}" id="{{ classroom.getTeacher() }}">
+                                           Contacter prof
+                                       </a>
                                    </td>
-                                   </td>
+                                   {% endif %}
+
                                </tr>
                            {% endfor %}
                        {% endfor %}

@@ -43,11 +43,6 @@ class Classroom
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Measure::class, mappedBy="classroom")
-     */
-    private $measures;
-
-    /**
      * @ORM\OneToMany(targetEntity=Publication::class, mappedBy="classroom")
      */
     private $publications;
@@ -57,7 +52,7 @@ class Classroom
         $this->users = new ArrayCollection();
         $this->measures = new ArrayCollection();
         $this->publications = new ArrayCollection();
-		$this->publicMessages = new ArrayCollection();
+        $this->publicMessages = new ArrayCollection();
     }
     public function __toString()
     {
@@ -68,6 +63,7 @@ class Classroom
     {
         return $this->id;
     }
+
 
     public function getName(): ?string
     {
@@ -99,6 +95,29 @@ class Classroom
     public function getUsers(): Collection
     {
         return $this->users;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTeacher()
+    {
+        $users = $this->getUsers();
+
+        foreach ($users as $user) {
+
+            if ($user->getRoles() == "ROLE_TEACHER" || $user->getRoles() == "ROLE_ADMIN" || $user->getRoles() == "ROLE_SUPER_ADMIN") {
+                return $user->getId();
+            } else {
+                $roles = $user->getRoles();
+                foreach ($roles as $role) {
+                    if ($role == "ROLE_TEACHER" || $role == "ROLE_ADMIN" || $role == "ROLE_SUPER_ADMIN") {
+                        return $user->getId();
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public function addUser(User $user): self
@@ -133,22 +152,7 @@ class Classroom
         return $this;
     }
 
-    /**
-     * @return Collection|Measure[]
-     */
-    public function getMeasures(): Collection
-    {
-        return $this->measures;
-    }
-
-    public function addMeasure(Measure $measure): self
-    {
-        if (!$this->measures->contains($measure)) {
-            $this->measures[] = $measure;
-            $measure->setClassroom($this);
-        }
-    }
-	/*
+    /*
      * @return Collection|PublicMessage[]
      */
     public function getPublicMessages(): Collection
@@ -161,23 +165,12 @@ class Classroom
         if (!$this->publicMessages->contains($publicMessage)) {
             $this->publicMessages[] = $publicMessage;
             $publicMessage->setIdClasseEmeteur($this);
-
         }
 
         return $this;
     }
 
 
-    public function removeMeasure(Measure $measure): self
-    {
-        if ($this->measures->contains($measure)) {
-            $this->measures->removeElement($measure);
-            // set the owning side to null (unless already changed)
-            if ($measure->getClassroom() === $this) {
-                $measure->setClassroom(null);
-            }
-        }
-    }
 
     public function removePublicMessage(PublicMessage $publicMessage): self
     {
@@ -222,5 +215,17 @@ class Classroom
         }
 
         return $this;
+    }
+
+    public function getMeasures()
+    {
+        $array = [];
+
+        for ($i = 0; $i < count($this->getPublications()); $i++) {
+            if ($this->getPublications()[$i]->getMeasure()) {
+                $array[$i] = $this->getPublications()[$i]->getMeasure();
+            }
+        }
+        return $array;
     }
 }

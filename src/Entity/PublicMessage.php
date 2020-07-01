@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PublicMessageRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\PublicMessageRepository")
  */
 class PublicMessage
 {
@@ -19,77 +19,100 @@ class PublicMessage
      */
     private $id;
 
-
     /**
-     * @ORM\Column(type="text")
+     * @ORM\ManyToOne(targetEntity=Classroom::class)
+     * @ORM\JoinColumn(name="receiver", referencedColumnName="id")
      */
-    private $content;
+    protected $receiver;
 
     /**
      * @ORM\ManyToOne(targetEntity=Classroom::class)
-     * @ORM\JoinColumn(name="idClassEmeteur", referencedColumnName="id")
+     * @ORM\JoinColumn(name="sender", referencedColumnName="id")
      */
-    private $idClasseEmeteur;
+
+    protected $sender;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Classroom::class)
-     * @ORM\JoinColumn(name="idClasseDestinataire", referencedColumnName="id")
+     * @ORM\Column(type="text", name="content")
      */
-    private $idClasseDestinataire;
 
-    public function __construct()
-    {
-        $this->idClasseDestinataire = new ArrayCollection();
-        $this->idClasseEmeteur = new ArrayCollection();
-    }
+    protected $content;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="datetime", name="sendAt", nullable=true)
+     */
+    protected $sendAt;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-
-
-
-    public function getContent(): ?string
+    /**
+     * @return mixed
+     */
+    public function getContent()
     {
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content): void
     {
         $this->content = $content;
-
-        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getIdClasseEmeteur()
+    public function getReceiver()
     {
-        return $this->idClasseEmeteur;
+        return $this->receiver;
     }
 
-    public function setIdClasseEmeteur(?Classroom $idClasseEmeteur): self
+    /**
+     * @param mixed $receiver
+     */
+    public function setReceiver($receiver): void
     {
-        $this->idClasseEmeteur = $idClasseEmeteur;
-
-        return $this;
+        $this->receiver = $receiver;
     }
 
     /**
      * @return mixed
      */
-    public function getIdClasseDestinataire()
+    public function getSender()
     {
-        return $this->idClasseDestinataire;
+        return $this->sender;
     }
 
-    public function setIdClasseDestinataire(?Classroom $idClasseDestinataire): self
+    /**
+     * @param mixed $sender
+     */
+    public function setSender($sender): void
     {
-        $this->idClasseDestinataire = $idClasseDestinataire;
-
-        return $this;
+        $this->sender = $sender;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSendAt()
+    {
+        return $this->sendAt;
+    }
+
+    /**
+     * @param mixed $sendAt
+     */
+    public function setSendAt($sendAt): void
+    {
+        $this->sendAt = $sendAt;
+    }
+
 }
