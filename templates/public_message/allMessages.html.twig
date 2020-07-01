@@ -2,16 +2,17 @@
 
 {% block body %}
     {% for message in messages %}
+        <hr>
         <div class="container ">
             <div class="card tabPublication">
             <h3 class="card-title" style="text-align:center;"> <a href="{{ message.sender.id }}"> {{ message.sender }}</a> to <a href=""> {{ message.receiver }} </a></h3>
 
-                <p>
+                <p class="text-center">
                     {{ message.content }}
                 </p>
                 <br></br>
-                <h6 class="card-subtitle mb-2 text-muted">{{ message.sendAt ? message.sendAt|date('Y-m-d') : '' }}</h6>
-                <hr></hr>
+                <h6 class="card-subtitle mb-2 text-muted text-lg-right">{{ message.sendAt ? message.sendAt|date('Y-m-d') : '' }}</h6>
+
             </div>
         </div>
     {% endfor %}
