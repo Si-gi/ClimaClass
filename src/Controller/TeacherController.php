@@ -53,13 +53,13 @@ class TeacherController extends AbstractController
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $formEvent) {
 
                 $this->formE =  $formEvent->getForm();
-                dump($this->formE);
+
                 $classroom = $this->formE->get("classroom")->getData();
-                dump($classroom);
+
                 $clr = $this->getDoctrine()->getRepository(Classroom::class)->find($classroom);
                 $this->formE->getData()->setClassroom($clr);
                 $this->formE->getData()->setDate(new \DateTime());
-                dump($this->formE);
+
             })
             ->getForm();
 
@@ -69,7 +69,7 @@ class TeacherController extends AbstractController
 
             $filesystem = new Filesystem();
             $publicationCreated = $form->getData();
-            dump($publication);
+
 
             $files = $form['files']->getData();
             foreach ($files as $file) {

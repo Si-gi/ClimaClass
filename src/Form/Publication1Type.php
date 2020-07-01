@@ -15,7 +15,6 @@ class Publication1Type extends AbstractType
             ->add('title')
             ->add('content')
             ->add('date')
-            ->add('eleve')
             ->add('classroom')
         ;
     }

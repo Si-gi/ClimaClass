@@ -15,8 +15,7 @@ class PublicationType extends AbstractType
             ->add('title')
             ->add('content')
 
-            ->add('date')
-            ->add('eleve');
+            ->add('date');
     }
 
     public function configureOptions(OptionsResolver $resolver)
