@@ -10,7 +10,7 @@
 <h3 class="titleH3">Se connecter</h3>
 
 <form action="{{ path("fos_user_security_check") }}" method="post">
-  <div class="form-group formconnect">
+  <div class="">
         {% if csrf_token %}
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
         {% endif %}
@@ -21,7 +21,7 @@
         <label for="password">{{ 'security.login.password'|trans }}</label>
         <input type="password" class="form-control" id="password" name="_password" required="required" autocomplete="current-password" />
 
-        <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me" value="on" />
+        <input type="checkbox" class="" id="remember_me" name="_remember_me" value="on" />
         <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
         <br>
         <input type="submit" class="btn btn-primary btnsubmit btnclima" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
