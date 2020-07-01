@@ -48,9 +48,14 @@ class Publication
      */
     private $measure;
 
+    /**
+     * @ORM\OneToMany(targetEntity=File::class, mappedBy="publication", orphanRemoval=true)
+     */
+    private $files;
+
     public function __construct()
     {
-        $this->data = new ArrayCollection();
+        $this->files = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +135,37 @@ class Publication
     public function setMeasure(?Measure $measure): self
     {
         $this->measure = $measure;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|File[]
+     */
+    public function getFiles(): Collection
+    {
+        return $this->files;
+    }
+
+    public function addFile(File $file): self
+    {
+        if (!$this->files->contains($file)) {
+            $this->files[] = $file;
+            $file->setPublication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFile(File $file): self
+    {
+        if ($this->files->contains($file)) {
+            $this->files->removeElement($file);
+            // set the owning side to null (unless already changed)
+            if ($file->getPublication() === $this) {
+                $file->setPublication(null);
+            }
+        }
 
         return $this;
     }

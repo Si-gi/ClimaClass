@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AJouter une publication - climaClass{% endblock %}
+
+{% block body %}
+<div class="container">
+<h3 class="homeTitle">Ajouter une publication</h3>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post" name="form" enctype="multipart/form-data">
+            
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Title</label>
+                    
+                    {{form_widget(form.title, {'attr': {'class': 'form-control'}})}}
+                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Content</label>
+                    {{form_widget(form.content, {'attr': {'class': 'form-control'}})}}
+                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Class Room</label>
+                    {{form_widget(form.classroom, {'attr': {'class': 'form-control'}})}}
+                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Temperature</label>
+                    {{form_widget(form.measure.temperature, {'attr': {'class': 'form-control'}})}}
+                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>                
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Wind Speed</label>
+                    {{form_widget(form.measure.windSpeed, {'attr': {'class': 'form-control'}})}}
+                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Wind Direction</label>
+                    {{form_widget(form.measure.windDirection, {'attr': {'class': 'form-control'}})}}
+                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Rain Level</label>
+                    {{form_widget(form.measure.rainLevel, {'attr': {'class': 'form-control'}})}}
+                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Rain Measure Duration</label>
+                    {{form_widget(form.measure.rainMeasureDuration, {'attr': {'class': 'form-control'}})}}
+                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+                <div class="custom-file">
+                    
+                    <label class="custom-file-label" for="files">choose files</label>  
+                   
+                    {{form_widget(form.files, {'attr': {'class': 'custom-file-input'}})}}
+                    
+                </div>                                                              
+                <div class="d-flex justify-content-center" >
+                    <button type="submit" class="btn btn-primary" style="width:30%; margin-top:20px">Valider</button>
+                </div>  
+                {{ form_rest(form) }}                               
+            </form>
+            
+        </div>
+    </div>  
+</div>
+{% endblock %}
