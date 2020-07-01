@@ -32,15 +32,12 @@ class File
      */
     private $fileSize;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $entity;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Publication::class, inversedBy="files")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_entity;
+    private $publication;
 
     public function getId(): ?int
     {
@@ -83,26 +80,15 @@ class File
         return $this;
     }
 
-    public function getEntity(): ?string
+
+    public function getPublication(): ?Publication
     {
-        return $this->entity;
+        return $this->publication;
     }
 
-    public function setEntity(string $entity): self
+    public function setPublication(?Publication $publication): self
     {
-        $this->entity = $entity;
-
-        return $this;
-    }
-
-    public function getIdEntity(): ?int
-    {
-        return $this->id_entity;
-    }
-
-    public function setIdEntity(int $id_entity): self
-    {
-        $this->id_entity = $id_entity;
+        $this->publication = $publication;
 
         return $this;
     }
