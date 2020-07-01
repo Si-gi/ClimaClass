@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Publication;
 use App\Form\PublicationType;
+use App\Entity\Classroom;
 use App\Repository\PublicationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,23 +21,13 @@ class PublicationController extends AbstractController
      */
     public function index(PublicationRepository $publicationRepository): Response
     {
-      $role=$this->getUser()->getRoles();
-      if ($role[0] == "ROLE_USER" ){
-        return $this->render('publication/showAllEleve.html.twig', [
-            'publications' => $publicationRepository->findAll(),
-
-        ]);
-      }
-      if($role[0] == "ROLE_TEACHER" || $role[0] == "ROLE_ADMIN"){
+      
         return $this->render('publication/showAll.html.twig', [
             'publications' => $publicationRepository->findAll(),
         ]);
-      }
-      else {
-        return $this->render('publication/index.html.twig', [
-            'publications' => $publicationRepository->findAll(),
-        ]);
-      }
+
+
+
     }
 
 
@@ -71,6 +62,26 @@ class PublicationController extends AbstractController
         return $this->render('publication/show.html.twig', [
             'publication' => $publication,
         ]);
+    }
+
+    /**
+     * @Route("/class/{id}", name="publication_classe", methods={"GET"})
+     */
+    public function showforClass(Classroom $class,PublicationRepository $publicationRepository,$id): Response
+    {
+      $role=$this->getUser()->getRoles();
+
+      $publicationClass=$publicationRepository->findBy(['classroom' => $id]);
+      if($role[0] == "ROLE_TEACHER" || $role[0] == "ROLE_ADMIN"){
+        return $this->render('publication/showAll.html.twig', [
+            'publications' => $publicationClass,
+        ]);
+      }
+      else {
+        return $this->render('publication/showAllEleve.html.twig', [
+            'publications' => $publicationClass,
+        ]);
+      }
     }
 
 

@@ -1,43 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Publication index{% endblock %}
+{% block title %}Relevés{% endblock %}
 
 {% block body %}
+<h3>Les rélevés</h3>
 
-<section>
-    <h3 class="titleH3">Les rélevés</h3>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Date</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+</section>
 
-        {% for publication in publications|sort((a, b) => a.title <=> b.title ) %}
-            <tr>
-                <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a></td>
-                <td><a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a></td>
-                <td>{{ publication.date ? publication.date|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('publication_show', {'id': publication.id}) }}">voir le relevé</a>
-                </td>
-                <td>
-                  {{include('publication/_delete_form.html.twig')}}
-                </td>
 
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">pas de relevé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('publication_new') }}">Créer un nouveau relevé </a>
 {% endblock %}
