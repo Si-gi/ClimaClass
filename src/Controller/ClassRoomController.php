@@ -34,5 +34,10 @@ class ClassRoomController extends AbstractController
     public function classroom(Request $request, $id){
 
         $classroom = $this->classRoomRepository->find($id);
+        dump($classroom);
+
+        return $this->render('classroom/show.html.twig', [
+            'class'=> $classroom,
+        ]);
     }
 }

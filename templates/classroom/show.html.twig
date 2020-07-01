@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classe{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tbody>
+            <th style="text-align:center;"><h3>{{class|upper}}</h3></th>
+            <tr>
+            <td></td>
+            </tr>
+        </tbody>
+    </table>
+  <h4>  Relevés de la classe : </h4>
+{% for publication in class.publications %}
+<div class="container">
+<div class:"card tabPublication">
+<div class:"card-body">
+<h5 class="card-title">{{publication.title}}</h5>
+<p>Description : {{publication.content}}</p>
+</div>
+</div>
+</div>
+{% endfor %}
+
+{% endblock %}

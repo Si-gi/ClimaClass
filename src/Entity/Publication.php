@@ -42,11 +42,6 @@ class Publication
      **/
     private $measures;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="publication")
-     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
-     **/
-    private $eleve;
 
     /**
      * @ORM\ManyToOne(targetEntity=Classroom::class, inversedBy="publications")
@@ -140,22 +135,7 @@ class Publication
         return $this->content;
     }
 
-    /**
-     * @return string
-     */
-    public function getEleve()
-    {
-        return $this->eleve;
-    }
 
-    /**
-     * @param User $eleve
-     * @return Pulbicatoin
-     */
-    public function setEleve($eleve){
-      $this->eleve = $eleve;
-      return $this;
-    }
 
     public function getClassroom(): ?Classroom
     {
