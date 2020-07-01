@@ -8,9 +8,6 @@ easy_admin_bundle:
   prefix: /admin
   type: annotation
 
-classroom:
-  path: /classroom/{id}
-  controller: App\Controller\ClassRoomController
 publication:
   path: /publication/
   controller: App\Controller\PublicationController
@@ -23,3 +20,9 @@ class_message:
 classroom_messages:
   path: classroom_messages/{classroom_id}
   controller: App\Controller\ClassRoomController::seeAllMessages
+mymessages:
+  path: /mymessages/
+  controller: App\Controller\ClassRoomController::myMessages
+classroom_conversation:
+  path: classroom/{classroom_contact_a}/{classroom_contact_b}
+  controller: App\Controller\ClassRoomController::seeMessages
