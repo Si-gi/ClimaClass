@@ -3,7 +3,8 @@
 {% block title %}Publication{% endblock %}
 
 {% block body %}
-<a href="{{ path('publication_index') }}"><h6><i class="fa fa-arrow-circle-left"></i> retour aux relevés</h6></a>
+<a href="{{ (app.request.headers.get('referer'))
+ }}"><h6><i class="fa fa-arrow-circle-left"></i> retour aux relevés</h6></a>
 
     <table class="table">
         <tbody>
@@ -23,6 +24,35 @@
                 <th>Classe</th>
                 <td>{{ publication.classroom}}</td>
             </tr>
+            {% if publication.measure != null %}
+            {% if publication.measure.temperature != null %}
+            <tr>
+                <th>Temperature </th>
+                <td>{{ publication.measure.temperature}} °</td>
+            </tr>
+          {% endif %}
+
+          {% if publication.measure.windSpeed != null %}
+          <tr>
+              <th>Vitesse du vent </th>
+              <td>{{ publication.measure.windSpeed}} km/h</td>
+          </tr>
+        {% endif %}
+
+        {% if publication.measure.windDirection != null %}
+        <tr>
+            <th>Direction du vent </th>
+            <td>{{ publication.measure.windDirection}} °</td>
+        </tr>
+      {% endif %}
+
+      {% if publication.measure.rainLevel != null %}
+      <tr>
+          <th>Précipitations </th>
+          <td>{{ publication.measure.rainLevel}} mm</td>
+      </tr>
+    {% endif %}
+  {% endif %}
         </tbody>
     </table>
     {% set maClasse = 0 %}

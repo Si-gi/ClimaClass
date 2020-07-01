@@ -49,7 +49,7 @@ class ClassRoomController extends AbstractController
     public function classroom(Request $request, PublicationRepository $publicationRepository,PaginatorInterface $paginator, $id){
 
         $classroom = $this->classRoomRepository->find($id);
-        $donnees = $publicationRepository->findBy(['classroom' => $id],);
+        $donnees = $publicationRepository->findBy(['classroom' => $id],['date' => 'DESC']);
         $publications = $paginator->paginate($donnees,$request->query->getInt('page', 1),4);
         return $this->render('classroom/show.html.twig', [
             'class'=> $classroom,
