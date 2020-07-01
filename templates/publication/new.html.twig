@@ -3,9 +3,9 @@
 {% block title %}New Publication{% endblock %}
 
 {% block body %}
-    <h1>create new Publication</h1>
+    <h1>Create new Publication</h1>
 
     {{ include('publication/_form.html.twig') }}
 
-    <a href="">back to list</a>
+    <a href="{{ path('publication_index') }}">back to list</a>
 {% endblock %}
