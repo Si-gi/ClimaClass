@@ -17,7 +17,7 @@ class MeasureFormType extends AbstractType
             ->add('windSpeed')
             ->add('windDirection')
             ->add('rainLevel')
-//            ->add('measurementDate')
+            ->add('measurementDate')
             ->add('rainMeasureDuration')
         ;
     }
