@@ -33,15 +33,14 @@ class TeacherController extends AbstractController
     public function add_publication(Request $request, EntityManagerInterface $entityManagerInterface)
     {
 
-
-
         $publication = new Publication();
         $form = $this->createFormBuilder($publication)
             ->add("title", TextType::class)
             ->add("content", TextareaType::class)
             ->add("files", FileType::class, [
                 'multiple' => true,
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ])
             ->add("classroom", EntityType::class, [
                 'class' => Classroom::class,
@@ -72,17 +71,22 @@ class TeacherController extends AbstractController
 
 
             $files = $form['files']->getData();
-            foreach ($files as $file) {
-                $extension = $file->guessExtension();
-                $newNameFile = $publicationCreated->getTitle() . '-' . uniqid() . '.' . $extension;
-                $fileSize = $file->getClientSize();
-                $file->move($this->getParameter('uploads'), $newNameFile);
-                $filer = new File();
-                $filer->setName($newNameFile);
-                $filer->setMimeType($extension);
-                $filer->setFileSize($fileSize);
-                $entityManagerInterface->persist($filer);
-                $publicationCreated->addFile($filer);
+
+            if(count($files) > 0){
+                foreach ($files as $file) {
+                    $extension = $file->guessExtension();
+                    $newNameFile = $publicationCreated->getTitle() . '-' . uniqid() . '.' . $extension;
+                    $fileSize = $file->getClientSize();
+                    $file->move($this->getParameter('uploads'), $newNameFile);
+                    $filer = new File();
+                    $filer->setName($newNameFile);
+                    $filer->setMimeType($extension);
+                    $filer->setFileSize($fileSize);
+                    $entityManagerInterface->persist($filer);
+                    $publicationCreated->addFile($filer);
+                }
+            }else{
+
             }
 
             $entityManagerInterface->persist($publicationCreated);

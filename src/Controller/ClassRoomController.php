@@ -57,6 +57,9 @@ class ClassRoomController extends AbstractController
 
           ]);
 
+    }
+
+    public function downloadFile($id_releve){
 
     }
 

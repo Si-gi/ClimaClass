@@ -49,6 +49,7 @@ class Publication
     private $measure;
 
     /**
+     * @ORM\Column(nullable=true)
      * @ORM\OneToMany(targetEntity=File::class, mappedBy="publication", orphanRemoval=true)
      */
     private $files;
@@ -147,7 +148,7 @@ class Publication
         return $this->files;
     }
 
-    public function addFile(File $file): self
+    public function addFile(File $file = null ): self
     {
         if (!$this->files->contains($file)) {
             $this->files[] = $file;
