@@ -22,17 +22,16 @@ class PublicMessageRepository extends ServiceEntityRepository
     /**
      * @return array
      */
-    public function getConv($receiver, $sender){
+    public function getConv($receiver){
         $entityManager = $this->getEntityManager();
         $queryBuilder = $entityManager->
         createQuery('SELECT p 
                             FROM App\Entity\PublicMessage p
-                            WHERE p.receiver = :receiver AND p.sender = :sender 
-                            OR p.receiver= :sender AND p.sender = :receiver
+                            WHERE p.receiver = :receiver OR p.sender = :sender
                             
                             ')
             ->setParameter('receiver', $receiver)
-            ->setParameter('sender', $sender);
+            ->setParameter('sender', $receiver);
         return $queryBuilder->execute();
     }
 
