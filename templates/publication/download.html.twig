@@ -19,4 +19,9 @@
     {% endfor %}
     </tbody>
 </table>
+    <script>
+        navigator.geolocation.getCurrentPosition(function(position) {
+            faireQqc(position.coords.latitude, position.coords.longitude);
+        });
+    </script>
 {% endblock %}
