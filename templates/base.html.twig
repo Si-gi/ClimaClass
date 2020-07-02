@@ -21,7 +21,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-timeline-graph2d.min.js" integrity="sha256-v9Qo6pYzFF2g0RUa5jlrK3HO2YfYXnj5aXQzPJJ46wY=" crossorigin="anonymous"></script>
             <style>
                 body{
-                   }
+                background: rgb(255,255,255);
+                background: linear-gradient(7deg, rgba(255,255,255,1) 0%, rgba(115,233,122,1) 100%);
+                background-repeat: no-repeat;
+                }
                 .titleH3{
                     text-align:center !important;
                     margin-top:90px !important;
@@ -134,6 +137,27 @@
                     padding:100px;
                     margin-left:auto !important;
                     margin-right:auto !important;
+                    height: 705px !important;
+                }
+                .myButton {
+                    background-color:#44c767;
+                    border-radius:28px;
+                    border:1px solid #18ab29;
+                    display:inline-block;
+                    cursor:pointer;
+                    color:#ffffff;
+                    font-family:Arial;
+                    font-size:17px;
+                    padding:14px 65px;
+                    text-decoration:none;
+                    text-shadow:0px 1px 0px #2f6627;
+                }
+                .myButton:hover {
+                    background-color:#5cbf2a;
+                }
+                .myButton:active {
+                    position:relative;
+                    top:1px;
                 }
                 .formconnect{
                     width: 32%;
@@ -235,7 +259,7 @@
         <a class="" href="{{ path('search') }}"><i class="fa fa-fw fa-search"></i><br>Search<br></a>
         <a class="menuR"href="{{ path('mymessages') }}"><i class="fa fa-fw fa-envelope"></i><br> Messages</a>
         <a href="{{ path('publication_index') }}"><i class="fa fa-fw fa-address-card"></i><br> Relevés</a>
-        <a href="{{ path('mesure') }}"><i class="fa fa-fw fa-thermometer-full"></i><br> Mesure</a>
+        {# <a href="{{ path('mesure') }}"><i class="fa fa-fw fa-thermometer-full"></i><br> Mesure</a> #}
     </div>
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
             <a href="{{ path("contacts") }}"><i class="fa fa-fw fa-user"></i><br> contact</a>
