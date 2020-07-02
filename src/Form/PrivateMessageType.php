@@ -13,10 +13,14 @@ class PrivateMessageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content', TextareaType::class)
+        $builder->add('content', TextareaType::class,
+         [
+                    'attr' => ['class' => 'form-control', 'rows'=>"3"],
+         ]
+        )
             ->add('submit', SubmitType::class,
                 [
-                    'attr' => ['class' => 'form-control btn-primary pull-right'],
+                    'attr' => ['class' => 'form-control btn-primary'],
                     'label' => 'Create!'
                 ]);
 

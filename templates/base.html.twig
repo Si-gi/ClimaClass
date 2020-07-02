@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <title>{% block title %}ClimaClass{% endblock %}</title>
         {% block stylesheets %}
+        <link href="/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet" />
         <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
@@ -189,6 +191,35 @@
                 .releve_fond{
                     background-color: red !important;
                 }
+                }
+                .mymessage{
+
+                    border: #ffa500 ;
+                    border-style: solid;
+                    border-width: 1px;
+                    border-radius: 5px;
+                    margin-left:70%;
+                    margin-top: 5px;
+                    background-color:white;
+                }
+                .othermessage{
+                    border: #b42f52 ;
+                    border-style: solid;
+                    border-width: 1px;
+                    border-radius: 5px;
+                    margin-right:70%;
+                    margin-top: 5px;
+                    background-color:white;
+                }
+                .messagerie{
+                    background-color: #009688 !important
+                }
+                div.scroll {
+                    height: 450px;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    text-align: center;
+                    padding: 20px;
                 }
             </style>
         {% endblock %}
