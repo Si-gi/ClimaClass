@@ -13,7 +13,7 @@
         {% for classe in classes %}
             <tr>
                 <td>{{ classe.getName() }}</td>
-                <td><a class="btn-primary btn" href="{{ path('classroom_profil', {'id': classe.getId()}) }}"> See classroom</a></td>
+                <td><a class="btn-primary btn" href="{{ path('classroom_profil', {'id': classe.getId(),page:1}) }}"> See classroom</a></td>
             </tr>
         {% endfor %}
         </tbody>

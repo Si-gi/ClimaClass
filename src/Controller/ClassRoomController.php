@@ -74,12 +74,14 @@ class ClassRoomController extends AbstractController
         $classroom = $this->classRoomRepository->find($id);
         $donnees = $publicationRepository->findBy(['classroom' => $id],['date' => 'DESC']);
         $publications = $paginator->paginate($donnees, $request->query->getInt('page', 1), 4);
+        $nbPages = count($donnees) / 4;
         return $this->render('classroom/show.html.twig', [
             'class' => $classroom,
             'publications' => $publications,
             'temperatures' => $temperatures,
             'windSpeeds' => $windSpeeds,
-            'rainLevels' => $rainLevels
+            'rainLevels' => $rainLevels,
+            'pages'=> ceil($nbPages),
 
         ]);
     }
