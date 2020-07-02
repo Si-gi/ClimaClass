@@ -8,6 +8,30 @@
 <hr>
     {% set myRow = 2 %}
 
+    <div class="card">
+
+      <div class="card-title">
+          <h3>Graphiques</h3>
+      </div>
+      <div class="card-body">
+
+          <div>
+          <h3 class="titleH3">Mesures</h3>
+          <div style="border:2px solid red;width:800px; font-size:14px; text-align: justify;">
+          </div>
+          <br />
+          <div class="container-fluid">
+            <div class="row">
+              <div id="temperature" class="col"></div>
+              <div id="windSpeed" class="col"></div>
+              <div id="rainLevel" class="col"></div>
+            </div>
+          </div>
+
+          </div>
+      </div>
+    </div>
+
 
   <h4>  Relevés de la classe : </h4>
 {% for publication in publications %}
@@ -37,6 +61,113 @@
   {% set myRow = myRow + 1 %}
 {% endfor %}
 {{ knp_pagination_render(publications) }}
+
+          <script type="text/javascript">
+              // create a dataSet with groups
+              var names = ['Temperature(°C)', 'Wind Speed(km/h)', 'Rain Level(nm)'];
+              var windspeed = new vis.DataSet();
+              var rainLevel = new vis.DataSet();
+              var groups = new vis.DataSet();
+
+              groups.add({
+                  id: 2,
+                  content: names[0],
+                  options: {
+                      yAxisOrientation: 'left', // right, left
+                      drawPoints: true
+                  }
+              });
+
+                  windspeed.add({
+                  id: 2,
+                  content: names[1],
+                  options: {
+                      yAxisOrientation: 'left', // right, left
+                      drawPoints: true
+                  }
+              });
+
+                  rainLevel.add({
+                  id: 2,
+                  content: names[2],
+                  options: {
+                      yAxisOrientation: 'left', // right, left
+                      drawPoints: true
+                  }
+              });
+
+
+              var containerWindSpeed = document.getElementById('windSpeed'); 
+              var containerRainLevel = document.getElementById('rainLevel');
+              var container = document.getElementById('temperature');
+
+
+
+              var items = [];
+              {% for row in temperatures %}
+                  items[{{loop.index - 1}}] = {x: "{{row['date']}}" ,y:{{row['value']}},group:2};
+              {% endfor %}
+
+              var itemsWs = [];
+              {% for row in windSpeeds %}
+                  itemsWs[{{loop.index - 1}}] = {x: "{{row['date']}}" ,y:{{row['value']}},group:2};
+              {% endfor %}
+
+              var itemsRl = [];
+              {% for row in rainLevels %}
+                  itemsRl[{{loop.index - 1}}] = {x: "{{row['date']}}" ,y:{{row['value']}},group:2};
+              {% endfor %}
+
+              var dataset = new vis.DataSet(items);
+              var dataSetWs = new vis.DataSet(itemsWs);
+              var dataSetRl = new vis.DataSet(itemsRl);
+
+              var options = {
+                  dataAxis: {
+                      showMinorLabels: false,
+                      right: {
+                          title: {
+                              text: 'Date'
+                          }
+                      }
+                  },
+                  legend: {left:{position:"bottom-left"}},
+                  start: '2020-06-01',
+                  end: '2020-07-02'
+              };
+              var optionsWs = {
+                  dataAxis: {
+                      showMinorLabels: false,
+                      right: {
+                          title: {
+                              text: 'Date'
+                          }
+                      }
+                  },
+                  legend: {left:{position:"bottom-left"}},
+                  start: '2020-06-01',
+                  end: '2020-07-02'
+              };
+              var optionsRl = {
+                  dataAxis: {
+                      showMinorLabels: false,
+                      right: {
+                          title: {
+                              text: 'Date'
+                          }
+                      }
+                  },
+                  legend: {left:{position:"bottom-left"}},
+                  start: '2020-06-01',
+                  end: '2020-07-02'
+              };
+              var graph2d = new vis.Graph2d(container, items, groups, options);
+              var graph2dws = new vis.Graph2d(containerWindSpeed, itemsWs, windspeed, optionsWs);
+              var graph2dRl = new vis.Graph2d(containerRainLevel, itemsRl, rainLevel, optionsRl);
+
+              
+
+          </script>
 
 
 
