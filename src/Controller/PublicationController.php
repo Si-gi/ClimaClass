@@ -22,7 +22,8 @@ class PublicationController extends AbstractController
      */
     public function index(Request $request,PublicationRepository $publicationRepository,PaginatorInterface $paginator): Response
     {
-      $publications = $paginator->paginate($publicationRepository->findAll(),$request->query->getInt('page', 1),5);
+      $publis=$publicationRepository->findBy([],['date' => 'DESC']);
+      $publications = $paginator->paginate($publis,$request->query->getInt('page', 1),5);
         return $this->render('publication/showAll.html.twig', [
             'publications' => $publications,
         ]);
@@ -32,28 +33,28 @@ class PublicationController extends AbstractController
     }
 
 
-    /**
-     * @Route("/new", name="publication_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $publication = new Publication();
-        $form = $this->createForm(PublicationType::class, $publication);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($publication);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('publication_index');
-        }
-
-        return $this->render('publication/new.html.twig', [
-            'publication' => $publication,
-            'form' => $form->createView(),
-        ]);
-    }
+    // /**
+    //  * @Route("/new", name="publication_new", methods={"GET","POST"})
+    //  */
+    // public function new(Request $request): Response
+    // {
+    //     $publication = new Publication();
+    //     $form = $this->createForm(PublicationType::class, $publication);
+    //     $form->handleRequest($request);
+    //
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->persist($publication);
+    //         $entityManager->flush();
+    //
+    //         return $this->redirectToRoute('publication_index');
+    //     }
+    //
+    //     return $this->render('publication/new.html.twig', [
+    //         'publication' => $publication,
+    //         'form' => $form->createView(),
+    //     ]);
+    // }
 
     /**
      * @Route("/{id}", name="publication_show", methods={"GET"})
