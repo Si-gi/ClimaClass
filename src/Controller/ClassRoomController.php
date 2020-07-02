@@ -7,6 +7,7 @@ use App\Entity\Contacts;
 use Symfony\Component\Validator\Constraints\DateTime;
 use App\Entity\PrivateMessage;
 use App\Entity\PublicMessage;
+use App\Entity\File;
 use App\Entity\School;
 use App\Entity\Classroom;
 use App\Entity\Publication;
@@ -35,6 +36,8 @@ class ClassRoomController extends AbstractController
     private $publicMessageRepository;
     /** @var \Doctrine\Common\Persistence\ObjectRepository */
     private $publicationRepository;
+    /** @var \Doctrine\Common\Persistence\ObjectRepository */
+    private $fileRepository;
 
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -44,6 +47,7 @@ class ClassRoomController extends AbstractController
         $this->classRoomRepository = $entityManager->getRepository(Classroom::class);
         $this->publicMessageRepository = $entityManager->getRepository(PublicMessage::class);
         $this->publicationRepository = $entityManager->getRepository(Publication::class);
+        $this->fileRepository = $entityManager->getRepository(File::class);
     }
     /**
      * @Route("/classroomProfil/{id}", name="classroom_profil")
@@ -82,17 +86,14 @@ class ClassRoomController extends AbstractController
 
     /**
      * @param $id_releve
-     * @Route("files/{id_releve}", name="seeFIles")
+     * @Route("files/{id_releve}", name="seeFiles")
      */
     public function seeFiles($id_releve){
-        $publication = $this->publicationRepository->findOneById($id_releve);
-        $files = $publication->getFiles();
+        $files = $this->fileRepository->findBy(['publication' => $id_releve]);
+
         return $this->render("publication/download.html.twig",["files" => $files]);
     }
 
-    public function download($id_files){
-        $file = $this->fileRepository->findOneByID($id_files);
-    }
     /**
      * @param Request $request
      * @Route("/teacher/{classReceiver}", name="class_message")

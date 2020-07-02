@@ -35,29 +35,30 @@
 
   <h4>  Relevés de la classe : </h4>
 {% for publication in publications %}
-{% if myRow == 2 %}
-  <div class="row">
-  {% set myRow = 0 %}
-{% endif %}
-<div class="col-md-6" style="float:left">
-<div class="container ">
-<div class="card tabMyClass">
-<h3 class="card-title" style="text-align:center;">  <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a> </h3>
-  <div class="card-body">
-  <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a>
-  <br></br>
-  <hr></hr>
-  <h6 class="card-subtitle mb-2 text-muted">{{ publication.date ? publication.date|date('Y-m-d') : '' }}</h6>
-  <a href="{{ path('publication_show', {'id': publication.id}) }}" style="text-align:right;"><button class="newbtn">voir le relevé</button> </a>
+  {% if myRow == 2 %}
+    <div class="row">
+    {% set myRow = 0 %}
+  {% endif %}
+  <div class="col-md-6" style="float:left">
+  <div class="container ">
+  <div class="card tabMyClass">
+  <h3 class="card-title" style="text-align:center;">  <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a> </h3>
+    <div class="card-body">
+    <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a>
+    <br></br>
+    <hr></hr>
+    <h6 class="card-subtitle mb-2 text-muted">{{ publication.date ? publication.date|date('Y-m-d') : '' }}</h6>
+    <a href="{{ path('publication_show', {'id': publication.id}) }}" style="text-align:right;"><button class="newbtn">voir le relevé</button> </a>
+    <a href="{{ path('seeFiles', {'id_releve': publication.id}) }}" style="text-align:right;"><button class="newbtn">voir les fichiers</button> </a>
+    </div>
   </div>
-</div>
-</div>
-</div>
-{% if myRow == 1 %}
   </div>
-{% endif %}
+  </div>
+  {% if myRow == 1 %}
+    </div>
+  {% endif %}
 
-{% set myRow = myRow + 1 %}
+  {% set myRow = myRow + 1 %}
 {% endfor %}
 {{ knp_pagination_render(publications) }}
 
