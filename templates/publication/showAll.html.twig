@@ -16,6 +16,7 @@
               <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a>
               <br></br>
               <hr></hr>
+              <h5 class="card-subtitle mb-2 text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ publication.classroom.school.city}} ({{publication.classroom.school.state}})</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{ publication.date ? publication.date|date('Y-m-d') : '' }}</h6>
               <a href="{{ path('publication_show', {'id': publication.id}) }}" style="text-align:right;"><button class="newbtn">voir le relevé</button> </a>
               </div>
