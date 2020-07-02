@@ -38,3 +38,6 @@ new_publication:
 contacts:
   path: /teacher/contacts
   controller: App\Controller\UserController::seeContact
+teacher_class:
+  path: /teacher/myclasses
+  controller: App\Controller\UserController::seeMyClasses

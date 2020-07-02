@@ -21,9 +21,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-timeline-graph2d.min.js" integrity="sha256-v9Qo6pYzFF2g0RUa5jlrK3HO2YfYXnj5aXQzPJJ46wY=" crossorigin="anonymous"></script>
             <style>
                 body{
-                  background: rgb(255,255,255);
+    /*              background: rgb(255,255,255);
                 background: linear-gradient(7deg, rgba(255,255,255,1) 0%, rgba(115,233,122,1) 100%);
-                background-repeat: no-repeat;
+                background-repeat: no-repeat;*/
                    }
                 .titleH3{
                     text-align:center !important;
@@ -293,7 +293,7 @@
         {% endblock %}
 
     </head>
-    <body>
+    <body style="background-color: #fffaf1">
 
     <div class="navbar" style="border-bottom: solid 1px gray">
         <a href="{{ path('homepage') }}"><img src="{{asset('images/logo_climaclass.png')}}"></a>
@@ -303,6 +303,7 @@
             <a class="itemss" href="{{ path('publication_index',{page:1}) }}" style="color:black; font-weight:bold"><img src="{{asset('images/details.png')}}" /><br> Publications</a>
             <a class="itemss" href="{{ path('new_publication') }}" style="color:black; font-weight:bold"><img src="{{asset('images/new.png')}}" /><br> New Publication</a>
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
+                <a href="{{ path("teacher_class") }}" style="color:black; font-weight:bold" ><img src="{{asset('images/details.png')}}" /><br> My classrooms</a>
                 <a href="{{ path("contacts") }}" style="color:black; font-weight:bold" ><img src="{{asset('images/renommer.png')}}" /><br> contact</a>
             {% endif %}
         </div>

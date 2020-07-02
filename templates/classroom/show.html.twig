@@ -42,8 +42,24 @@
 
 {% set myRow = myRow + 1 %}
 {% endfor %}
-{{ knp_pagination_render(publications) }}
+<div style="display:flex;justify-content:center;">
+{% if app.request.query.get("page") == 1 %}
+  <i class="fa fa-arrow-circle-left fa-10x" style="color:grey"></i>
 
+{% else %}
+  <a href="{{path ('teacher_class', {'page': app.request.query.get("page") - 1})}}"><i class="fa fa-arrow-circle-left fa-10x"></i></a>
+
+{% endif %}
+  <h6 style="margin-top:20px;">{{app.request.query.get("page")}} / {{pages}}</h6>
+{% if app.request.query.get("page") == pages %}
+<i class="fa fa-arrow-circle-right fa-10x" style="color:grey"></i>
+
+{% else %}
+  <a href="{{path ('teacher_class', {'page': app.request.query.get("page") + 1})}}"><i class="fa fa-arrow-circle-right fa-10x"></i></a>
+{% endif %}
+
+
+</div>
 
 
 {% endblock %}

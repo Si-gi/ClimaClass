@@ -1,0 +1,23 @@
+ {% extends  'base.html.twig' %}
+{% block title %}My classes{% endblock %}
+{% block body %}
+<div class="container" style="background-color:white;margin-top:40px">
+        <table class="table">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for classe in classes %}
+            <tr>
+                <td>{{ classe.getName() }}</td>
+                <td><a class="btn-primary btn" href="{{ path('classroom_profil', {'id': classe.getId()}) }}"> See classroom</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

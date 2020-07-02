@@ -1,16 +1,102 @@
+
 {% trans_default_domain 'FOSUserBundle' %}
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
-
+<style>
+.connexion{
+    height: 800px !important;
+}
+.formconnect{
+    -webkit-box-shadow: 9px 10px 5px -3px rgba(255,255,255,0.67);
+    -moz-box-shadow: 9px 10px 5px -3px rgba(255,255,255,0.67);
+    box-shadow: 9px 10px 5px -3px rgba(255,255,255,0.67);
+}
+.myButton {
+                    background-color:#44c767;
+                    border-radius:28px;
+                    border:1px solid #18ab29;
+                    display:inline-block;
+                    cursor:pointer;
+                    color:#ffffff;
+                    font-family:Arial;
+                    font-size:17px;
+                    padding:14px 65px;
+                    text-decoration:none;
+                    text-shadow:0px 1px 0px #2f6627;
+                }
+                .myButton:hover {
+                    background-color:#5cbf2a;
+                }
+                .myButton:active {
+                    position:relative;
+                    top:1px;
+                }
+                .formconnect{
+                    width: 32%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    border: 5px solid green;
+                    border-radius: 10px;
+                    -webkit-box-shadow: 11px 13px 5px 0px rgba(209,240,225,0.77);
+                    -moz-box-shadow: 11px 13px 5px 0px rgba(255,255,255,1);
+                    box-shadow: 11px 13px 5px 0px rgba(201,234,240,-1);
+                    padding: 59px;
+                }
+                .btnsubmit{
+                    width: 100% !important;
+                }
+                .homeTitle{
+                    padding-top: 50px !important;
+                    padding-bottom: 50px !important;
+                    margin-top:auto !important;
+                    margin-bottom:auto !important;
+                    text-align:center !important;
+                }
+                .btnconnect{
+                    list-style:none;
+                }
+                .barrenav{
+                    background: white !important;
+                    color: green !important;
+                }
+                .navulbarre{
+                    margin-left: auto;
+                    /* padding: 0px; */
+                    margin-right: 64px !important;
+                }
+                .btnclima {
+                    box-shadow: 0px 6px 0px 0px #3dc21b;
+                    background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+                    background-color:#44c767;
+                    border-radius:28px;
+                    border:3px solid #18ab29;
+                    display:inline-block;
+                    cursor:pointer;
+                    color:#ffffff;
+                    font-family:Arial;
+                    font-size:15px;
+                    padding:12px 70px;
+                    text-decoration:none;
+                    text-shadow:0px 1px 0px #2f6627;
+                }
+                .btnclima:hover {
+                    background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+                    background-color:#5cbf2a;
+                }
+                .btnclima:active {
+                    position:relative;
+                    top:1px;
+                }
+</style>
 
 <body>
 <div class="connexion">
 
-<h3 class="titleH3">Se connecter</h3>
+<h3 class="titleH3">Login</h3>
 
 <form action="{{ path("fos_user_security_check") }}" method="post">
-  <div class="">
+  <div class="formconnect" style="width:20% !important;margin-left:auto !important;margin-right:auto !important;padding:65px !important; border:1px solid green;margin-top:30px;adding-top: 50px !important;padding-bottom: 50px !important;">
         {% if csrf_token %}
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
         {% endif %}
@@ -24,7 +110,7 @@
         <input type="checkbox" class="" id="remember_me" name="_remember_me" value="on" />
         <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
         <br>
-        <input type="submit" class="btn btn-primary btnsubmit btnclima" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        <input type="submit" class="btn btn-primary btnsubmit btnclima myButton" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
 </form>
 {% if app.request.hasPreviousSession %}
     {% for type, messages in app.session.flashBag.all %}
