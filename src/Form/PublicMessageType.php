@@ -23,7 +23,9 @@ class PublicMessageType extends AbstractType
     }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content', TextareaType::class)
+        $builder->add('content', TextareaType::class,  [
+            'attr' => ['class' => 'form-control', 'rows'=>"3"],
+        ])
             ->add('sender', EntityType::class,
             ['class' => Classroom::class,
                 'choices' => $options['classroom']

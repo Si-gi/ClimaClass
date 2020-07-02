@@ -17,6 +17,41 @@
 
 
   <h4>  Relevés de la classe : </h4>
+<div class="container-fluid" style="padding:20px">
+<h3 class="text-center" style="font-weight:bold;background-color:whitesmoke;margin-top:5px">Class Dashboard : {{class|upper}}</h3>
+    <div class="justify-content-around">
+        <a href="{{ path('class_message', {'classReceiver': class.getId()}) }}" class="btn btn-primary btn-lg text-left" role="button" aria-disabled="true"> Message <i class="fa fa-envelope"></i> </a>
+
+<button class="btn btn-primary btn-lg text-center" onclick="showMesures()">Mesures  <i class="fa fa-bar-chart" aria-hidden="true"></i>  </button>
+<button class="btn btn-primary btn-lg text-right" onclick="showPublications()"> Publications <i class="fa fa-newspaper-o" aria-hidden="true"></i></button>
+    </div>
+<div class=""  id="mesures" style="background-color:#ffd68d;margin-right:15px;border-radius:10px">
+
+                        <div>
+            <div  >
+            <h4 style="text-align:center; font-weight:bold;margin-bottom:30px">Measures</h4>
+            {% set myRow = 2 %}
+
+
+                <div>
+                <br />
+                <div class="container-fluid">
+                    <div class="d-flex flex-column justify-content-around" >
+                    <div id="temperature" class="col" style="margin-bottom:20px;background-color:white"></div>
+                    <div id="windSpeed" class="col" style="margin-bottom:20px;background-color:white"></div>
+                    <div id="rainLevel" class="col" style="background-color:white"></div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+            </div>
+
+</div>
+<div class="" id="publications" style="background-color:white;border-radius:10px">
+
+
+  <h4 style="text-align:center; font-weight:bold;margin-bottom:30px">Class Publications</h4>
 {% for publication in publications %}
 {% if myRow == 2 %}
   <div class="row">
@@ -40,6 +75,8 @@
   </div>
 {% endif %}
 
+
+
 {% set myRow = myRow + 1 %}
 {% endfor %}
 <div style="display:flex;justify-content:center;">
@@ -58,6 +95,90 @@
   <a href="{{path ('teacher_class', {'page': app.request.query.get("page") + 1})}}"><i class="fa fa-arrow-circle-right fa-10x"></i></a>
 {% endif %}
 
+<script type="text/javascript">
+    // create a dataSet with groups
+    var names = ['Temperature(°C)', 'Wind Speed(km/h)', 'Rain Level(nm)'];
+    var windspeed = new vis.DataSet();
+    var rainLevel = new vis.DataSet();
+    var groups = new vis.DataSet();
+
+    groups.add({
+        id: 2,
+        content: names[0],
+        options: {
+            yAxisOrientation: 'left', // right, left
+            drawPoints: true
+        }
+    });
+
+        windspeed.add({
+        id: 2,
+        content: names[1],
+        options: {
+            yAxisOrientation: 'left', // right, left
+            drawPoints: true
+        }
+    });
+
+        rainLevel.add({
+        id: 2,
+        content: names[2],
+        options: {
+            yAxisOrientation: 'left', // right, left
+            drawPoints: true
+        }
+    });
+
+
+    var containerWindSpeed = document.getElementById('windSpeed');
+    var containerRainLevel = document.getElementById('rainLevel');
+    var container = document.getElementById('temperature');
+
+
+
+    var items = [];
+    {% for row in temperatures %}
+        items[{{loop.index - 1}}] = {x: "{{row['date']}}" ,y:{{row['value']}},group:2};
+    {% endfor %}
+
+    var itemsWs = [];
+    {% for row in windSpeeds %}
+        itemsWs[{{loop.index - 1}}] = {x: "{{row['date']}}" ,y:{{row['value']}},group:2};
+    {% endfor %}
+                  function showMesures(){
+                  let mesures = $("#mesures");
+                  //let classrooms = document.getElementsByClassName("class-"+id);
+                      if( mesures[0].classList.contains("classroom-default")){
+                          mesures[0].classList.remove("classroom-default");
+                          mesures[0].classList.add("classroom-activ");
+                      }else{
+
+                          mesures[0].classList.remove("classroom-activ");
+                          mesures[0].classList.add("classroom-default");            }
+              }
+              function showPublications(){
+                  let publications= $("#publications");
+                  //let classrooms = document.getElementsByClassName("class-"+id);
+
+                      if( publications[0].classList.contains("classroom-default")){
+                          publications[0].classList.remove("classroom-default");
+                          publications[0].classList.add("classroom-activ");
+                      }else{
+                          publications[0].classList.remove("classroom-activ");
+                          publications[0].classList.add("classroom-default");
+                      }
+              }
+
+
+          </script>
+    <style>
+        .classroom-default{
+            display: none;
+        }
+        .classroom-activ{
+            display: block;
+        }
+    </style>
 
 </div>
 
