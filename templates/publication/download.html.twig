@@ -1,0 +1,22 @@
+{% include 'base.html.twig' %}
+
+{% block body %}
+<table class="table">
+    <thead>
+    <tr>
+        <td>FileName</td>
+        <td>FileSize</td>
+        <td>Download</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for file in files %}
+    <tr>
+        <td>{{ file.getName() }}</td>
+        <td>{{ file.getFileSize() }}</td>
+        <td> <a href="download/{{ file.getId() }}" class="btn btn-primary btn-lg">Download</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

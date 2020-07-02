@@ -9,6 +9,7 @@ use App\Entity\PrivateMessage;
 use App\Entity\PublicMessage;
 use App\Entity\School;
 use App\Entity\Classroom;
+use App\Entity\Publication;
 use App\Form\PublicMessageType;
 use App\Repository\PublicationRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +33,8 @@ class ClassRoomController extends AbstractController
     private $classRoomRepository;
     /** @var \Doctrine\Common\Persistence\ObjectRepository */
     private $publicMessageRepository;
+    /** @var \Doctrine\Common\Persistence\ObjectRepository */
+    private $publicationRepository;
 
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -40,6 +43,7 @@ class ClassRoomController extends AbstractController
         $this->schoolRepository = $entityManager->getRepository(School::class);
         $this->classRoomRepository = $entityManager->getRepository(Classroom::class);
         $this->publicMessageRepository = $entityManager->getRepository(PublicMessage::class);
+        $this->publicationRepository = $entityManager->getRepository(Publication::class);
     }
     /**
      * @Route("/classroomProfil/{id}", name="classroom_profil")
@@ -59,10 +63,19 @@ class ClassRoomController extends AbstractController
 
     }
 
-    public function downloadFile($id_releve){
-
+    /**
+     * @param $id_releve
+     * @Route("files/{id_releve}", name="seeFIles")
+     */
+    public function seeFiles($id_releve){
+        $publication = $this->publicationRepository->findOneById($id_releve);
+        $files = $publication->getFiles();
+        return $this->render("publication/download.html.twig",["files" => $files]);
     }
 
+    public function download($id_files){
+        $file = $this->fileRepository->findOneByID($id_files);
+    }
     /**
      * @param Request $request
      * @Route("/teacher/{classReceiver}", name="class_message")
