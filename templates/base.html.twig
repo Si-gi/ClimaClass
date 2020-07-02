@@ -281,7 +281,7 @@
         <a href="{{ path('homepage') }}"><img src="{{asset('images/logo_climaclass.png')}}"></a>
         <div class="navTog">
             <a class="itemss" href="{{ path('search') }}" style="color:black; font-weight:bold"><img src="{{asset('images/search.png')}}" /><br>Search<br></a></a>
-            <a class="itemss"href="{{ path('mymessages') }}" style="color:black; font-weight:bold"><img src="{{asset('images/icons_bule_message.png')}}" /></img><br> Messages</a>
+            <a class="itemss"href="{{ path('mymessages') }}" style="color:black; font-weight:bold"><img src="{{asset('images/message.png')}}" /></img><br> Messages</a>
             <a class="itemss" href="{{ path('publication_index') }}" style="color:black; font-weight:bold"><img src="{{asset('images/messages.png')}}" /><br> Publications</a>
             <a class="itemss" href="{{ path('new_publication') }}" style="color:black; font-weight:bold"><img src="{{asset('images/new.png')}}" /><br> New Publication</a>
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
