@@ -13,13 +13,13 @@
                 {% endfor %}
             {% endfor %}
 
-
+            <p>Send a message to</p>
             {{ form_start(form) }}
             <div class="col-md-12">
                 <div class="form-group col-md-4">
                     {{ form_row(form.content) }}
                 </div>
-                <div class="form-group col-md-4 pull-right">
+                <div class="form-group col-md-4 ">
                     {{ form_widget(form.submit) }}
                 </div>
                 {{ form_end(form) }}
