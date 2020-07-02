@@ -3,48 +3,50 @@
 {% block title %}Classe{% endblock %}
 
 {% block body %}
-    <h3 class="text-center">{{class|upper}}</h3>
-  <a href="{{ path('class_message', {'classReceiver': class.getId()}) }}" class="btn btn-primary btn-lg " role="button" aria-disabled="true"> Message </a>
-<hr>
-    {% set myRow = 2 %}
+<div class="container-fluid" style="padding:20px">
+<h3 class="text-center" style="font-weight:bold;background-color:whitesmoke;margin-top:5px">Class Dashboard : {{class|upper}}</h3>
+        <a href="{{ path('class_message', {'classReceiver': class.getId()}) }}" class="btn btn-primary btn-lg " role="button" aria-disabled="true"> Message <i class="fa fa-envelope"></i> </a>
 
-    <div class="card">
+<div class="row" style="margin-top:20px">
 
-      <div class="card-title">
-          <h3>Graphiques</h3>
-      </div>
-      <div class="card-body">
+<div class="col" style="background-color:#ffd68d;margin-right:15px;border-radius:10px">
+            
+                        <div>
+            <div  >
+            <h4 style="text-align:center; font-weight:bold;margin-bottom:30px">Measures</h4>
+            {% set myRow = 2 %}
 
-          <div>
-          <h3 class="titleH3">Mesures</h3>
-          <div style="border:2px solid red;width:800px; font-size:14px; text-align: justify;">
-          </div>
-          <br />
-          <div class="container-fluid">
-            <div class="row">
-              <div id="temperature" class="col"></div>
-              <div id="windSpeed" class="col"></div>
-              <div id="rainLevel" class="col"></div>
+
+                <div>
+                <br />
+                <div class="container-fluid">
+                    <div class="d-flex flex-column justify-content-around" >
+                    <div id="temperature" class="col" style="margin-bottom:20px;background-color:white"></div>
+                    <div id="windSpeed" class="col" style="margin-bottom:20px;background-color:white"></div>
+                    <div id="rainLevel" class="col" style="background-color:white"></div>
+                    </div>
+                </div>
+
+                </div>
             </div>
-          </div>
+            </div>
 
-          </div>
-      </div>
-    </div>
+</div>
+<div class="col" style="background-color:white;border-radius:10px">
 
 
-  <h4>  Relevés de la classe : </h4>
+  <h4 style="text-align:center; font-weight:bold;margin-bottom:30px">Class Publications</h4>
 {% for publication in publications %}
   {% if myRow == 2 %}
     <div class="row">
     {% set myRow = 0 %}
   {% endif %}
   <div class="col-md-6" style="float:left">
-  <div class="container ">
-  <div class="card tabMyClass">
+  <div class="container">
+  <div class="card tabPublication" style="background-color:#D6F9E6">
   <h3 class="card-title" style="text-align:center;">  <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a> </h3>
     <div class="card-body">
-    <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a>
+    <p>{{ publication.content }}</p>
     <br></br>
     <hr></hr>
     <h6 class="card-subtitle mb-2 text-muted">{{ publication.date ? publication.date|date('Y-m-d') : '' }}</h6>
@@ -61,7 +63,8 @@
   {% set myRow = myRow + 1 %}
 {% endfor %}
 {{ knp_pagination_render(publications) }}
-
+</div>
+</div>
           <script type="text/javascript">
               // create a dataSet with groups
               var names = ['Temperature(°C)', 'Wind Speed(km/h)', 'Rain Level(nm)'];
@@ -169,6 +172,6 @@
 
           </script>
 
-
+</div>
 
 {% endblock %}

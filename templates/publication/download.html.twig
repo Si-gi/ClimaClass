@@ -1,24 +1,31 @@
 {% include 'base.html.twig' %}
 
 {% block body %}
-<table class="table">
-    <thead>
-    <tr>
-        <td>FileName</td>
-        <td>FileSize</td>
-        <td>Download</td>
-    </tr>
-    </thead>
-    <tbody>
-    {% for file in files %}
-    <tr>
-        <td>{{ file.getName() }}</td>
-        <td>{{ file.getFileSize() }}</td>
-        <td> <a href="{{ asset('uploads/'~file.getName())}}" class="btn btn-primary btn-lg" download>Download</a></td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+
+<div class="container">
+    <div card>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>FileName</td>
+                    <td>FileSize</td>
+                    <td>Download</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for file in files %}
+                <tr>
+                    <td>{{ file.getName() }}</td>
+                    <td>{{ file.getFileSize() }}</td>
+                    <td> <a href="{{ asset('uploads/'~file.getName())}}" class="btn btn-primary btn-lg" download>Download</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
     <script>
         navigator.geolocation.getCurrentPosition(function(position) {
             faireQqc(position.coords.latitude, position.coords.longitude);
