@@ -4,22 +4,11 @@
 
 {% block body %}
 
-    <table class="table">
-        <tbody>
-            <th style="text-align:center;"><h3>{{class|upper}}</h3></th>
-            <tr>
-            <td></td>
-            </tr>
-        </tbody>
-    </table>
-
     {% set myRow = 2 %}
 
-
-  <h4>  Relevés de la classe : </h4>
 <div class="container-fluid" style="padding:20px">
 <h3 class="text-center" style="font-weight:bold;background-color:whitesmoke;margin-top:5px">Class Dashboard : {{class|upper}}</h3>
-    <div class="justify-content-around">
+    <div class="justify-content-around" style="margin-top:20px;margin-bottom:20px">
         <a href="{{ path('class_message', {'classReceiver': class.getId()}) }}" class="btn btn-primary btn-lg text-left" role="button" aria-disabled="true"> Message <i class="fa fa-envelope"></i> </a>
 
 <button class="btn btn-primary btn-lg text-center" onclick="showMesures()">Mesures  <i class="fa fa-bar-chart" aria-hidden="true"></i>  </button>
