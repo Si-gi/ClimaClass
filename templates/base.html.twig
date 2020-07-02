@@ -235,7 +235,6 @@
         <a class="" href="{{ path('search') }}"><i class="fa fa-fw fa-search"></i><br>Search<br></a>
         <a class="menuR"href="{{ path('mymessages') }}"><i class="fa fa-fw fa-envelope"></i><br> Messages</a>
         <a href="{{ path('publication_index') }}"><i class="fa fa-fw fa-address-card"></i><br> Relevés</a>
-        <a href="{{ path('mesure') }}"><i class="fa fa-fw fa-thermometer-full"></i><br> Mesure</a>
     </div>
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
             <a href="{{ path("contacts") }}"><i class="fa fa-fw fa-user"></i><br> contact</a>
