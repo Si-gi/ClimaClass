@@ -46,27 +46,44 @@ class ClassRoomController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function classroom(Request $request, PublicationRepository $publicationRepository,PaginatorInterface $paginator, $id){
+    public function classroom(Request $request, PublicationRepository $publicationRepository, PaginatorInterface $paginator, $id)
+    {
+
+        $temperatures = [];
+        $windSpeeds = [];
+        $rainLevels = [];
+
+        $measures = $this->getDoctrine()->getRepository(Classroom::class)->find($id)->getMeasures();
+
+        for ($i = 0; $i < count($measures); $i++) {
+
+            $temperatures[$i] = ['date' => $measures[$i]->getMeasurementDate()->format('Y-m-d'), 'value' => $measures[$i]->getTemperature()];
+            $windSpeeds[$i] = ['date' => $measures[$i]->getMeasurementDate()->format('Y-m-d'), 'value' => $measures[$i]->getWindSpeed()];
+            $rainLevels[$i] = ['date' => $measures[$i]->getMeasurementDate()->format('Y-m-d'), 'value' => $measures[$i]->getRainLevel()];
+        }
+
 
         $classroom = $this->classRoomRepository->find($id);
         $donnees = $publicationRepository->findBy(['classroom' => $id],);
-        $publications = $paginator->paginate($donnees,$request->query->getInt('page', 1),4);
+        $publications = $paginator->paginate($donnees, $request->query->getInt('page', 1), 4);
         return $this->render('classroom/show.html.twig', [
-            'class'=> $classroom,
-            'publications' => $publications
+            'class' => $classroom,
+            'publications' => $publications,
+            'temperatures' => $temperatures,
+            'windSpeeds' => $windSpeeds,
+            'rainLevels' => $rainLevels
 
-          ]);
-
-
+        ]);
     }
 
     /**
      * @param Request $request
      * @Route("/teacher/{classReceiver}", name="class_message")
      */
-    public function sendMessage(Request $request, $classReceiver){
+    public function sendMessage(Request $request, $classReceiver)
+    {
 
-        if($this->getUser()->getRoles() != "ROLE_TEACHER"){
+        if ($this->getUser()->getRoles() != "ROLE_TEACHER") {
             $this->redirectToRoute("classroom_messages");
         }
         $classReceiver = $this->classRoomRepository->findOneById($classReceiver);
@@ -77,7 +94,7 @@ class ClassRoomController extends AbstractController
         $message->setSendAt($date);
 
         $message->setReceiver($classReceiver);
-        $form = $this->createForm(PublicMessageType::class, $message, array('classroom' => $this->getUser()->getClassroom())) ;
+        $form = $this->createForm(PublicMessageType::class, $message, array('classroom' => $this->getUser()->getClassroom()));
         $form->handleRequest($request);
 
         // Check is valid
@@ -99,7 +116,8 @@ class ClassRoomController extends AbstractController
     /**
      * @Route("classroom/{classroom_contact_a}/{classroom_contact_b}", name="classroom_conversation")
      */
-    public function seeMessages(Request $request, $classroom_contact_a,$classroom_contact_b){
+    public function seeMessages(Request $request, $classroom_contact_a, $classroom_contact_b)
+    {
 
 
         $classroom_user = $this->getUser()->getClassroom()[0];
@@ -107,7 +125,7 @@ class ClassRoomController extends AbstractController
         $classSender = $this->classRoomRepository->findOneById($classroom_contact_a);
         $messages = $this->publicMessageRepository->getConv($classroom_contact_a, $classroom_contact_b);
 
-        return $this->render('public_message/message_class.html.twig',[
+        return $this->render('public_message/message_class.html.twig', [
             "messages" => $messages,
             "classSender" => $classSender,
             "classReceiver" => $classReceiver
@@ -117,24 +135,25 @@ class ClassRoomController extends AbstractController
     /**
      * @Route("mymessages/", name="mymessage")
      */
-    public function myMessages(){
+    public function myMessages()
+    {
 
-        if($this->getUser()->getRoles() != "ROLES_TEACHER"){
+        if ($this->getUser()->getRoles() != "ROLES_TEACHER") {
             $classroom = $this->getUser()->getClassroom()[0];
-          return  $this->redirectToRoute("classroom_messages", ['classroom_id' => $classroom->getId()]);
+            return  $this->redirectToRoute("classroom_messages", ['classroom_id' => $classroom->getId()]);
         }
-
     }
     /**
      * @Route("classroom_messages/{classroom_id}", name="classroom_messages")
      */
-    public function seeAllMessages(Request $request, $classroom_id){
+    public function seeAllMessages(Request $request, $classroom_id)
+    {
 
 
 
         $classroom = $this->publicMessageRepository->findOneById($classroom_id);
         $messages = $this->publicMessageRepository->getAllConv($classroom_id);
-        return $this->render('public_message/allMessages.html.twig',[
+        return $this->render('public_message/allMessages.html.twig', [
             "messages" => $messages,
             "classroom" => $classroom,
         ]);
