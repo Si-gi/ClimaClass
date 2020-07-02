@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
-{% block content %}
+{% block body %}
 
 <script type="text/css">
     #sidebar{
@@ -12,10 +12,10 @@
     }
 </script>
 <nav id="sidebar" >
-    <ul>
+    <ul class="list-group">
         {% for contact in contacts %}
-            <li>
-                <a href="{{ path("conversation" , {'contact': contact.idcontact }) }}" class="btn btn-warning">{{ contact.idContact }}</a>
+            <li class="list-group-item">
+                <a href="{{ path("conversation" , {'contact': contact.idcontact.id }) }}" class="btn btn-warning">{{ contact.idContact }}</a>
 
             </li>
         {% endfor %}

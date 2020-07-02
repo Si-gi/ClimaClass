@@ -121,7 +121,7 @@ class UserController extends AbstractController
         $contacts = $this->ContactsRepository->findByIdUser($user->getId());
         $receiver = $this->UserRepository->findOneById($contact);
         $messages = $this->privateMessageRepository->getConv($receiver->getId(), $user->getId());
-        //var_dump($messages);
+
 
         $messages = $this->privateMessageRepository->findBy(
             [
@@ -164,9 +164,9 @@ class UserController extends AbstractController
      */
     public function seeContact(){
         $contacts = $this->ContactsRepository->findByIdUser($this->getUser()->getId());
-        //$contacts = $this->ContactsRepository->findByIdContact($this->getUser()->getId());
+       // $contacts = $this->ContactsRepository->findByIdContact($this->getUser()->getId());
 
-        return $this->render('/private_messages/Contacts.html.twig',[
+        return $this->render('/private_message/Contacts.html.twig',[
             'contacts' => $contacts,
         ]);
     }

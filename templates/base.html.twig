@@ -6,6 +6,8 @@
         {% block stylesheets %}
                  {# Mesure graphique - mesure  #}
         <link href="css/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+        <link href="/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet" />
         <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
@@ -193,6 +195,35 @@
                     background-color: red !important;
                 }
                 }
+                .mymessage{
+
+                    border: #ffa500 ;
+                    border-style: solid;
+                    border-width: 1px;
+                    border-radius: 5px;
+                    margin-left:70%;
+                    margin-top: 5px;
+                    background-color:white;
+                }
+                .othermessage{
+                    border: #b42f52 ;
+                    border-style: solid;
+                    border-width: 1px;
+                    border-radius: 5px;
+                    margin-right:70%;
+                    margin-top: 5px;
+                    background-color:white;
+                }
+                .messagerie{
+                    background-color: #009688 !important
+                }
+                div.scroll {
+                    height: 450px;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    text-align: center;
+                    padding: 20px;
+                }
             </style>
         {% endblock %}
 
@@ -206,7 +237,10 @@
         <a href="{{ path('publication_index') }}"><i class="fa fa-fw fa-address-card"></i><br> Relevés</a>
         <a href="{{ path('mesure') }}"><i class="fa fa-fw fa-thermometer-full"></i><br> Mesure</a>
     </div>
-        <a href="#"><i class="fa fa-fw fa-user"></i><br> logout</a>
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
+            <a href="{{ path("contacts") }}"><i class="fa fa-fw fa-user"></i><br> contact</a>
+        {% endif %}
+        <a href="/logout"><i class="fa fa-fw fa-user"></i><br> logout</a>
     </div>
 
 
