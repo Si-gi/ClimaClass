@@ -1,7 +1,8 @@
-{% include 'base.html.twig' %}
+ {% extends  'base.html.twig' %}
 {% block title %}My classes{% endblock %}
 {% block body %}
-    <table class="table">
+<div class="container" style="background-color:white;margin-top:40px">
+        <table class="table">
         <thead>
         <tr>
             <td>Name</td>
@@ -17,5 +18,6 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
 
 {% endblock %}
