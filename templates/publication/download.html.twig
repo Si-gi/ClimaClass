@@ -14,7 +14,7 @@
     <tr>
         <td>{{ file.getName() }}</td>
         <td>{{ file.getFileSize() }}</td>
-        <td> <a href="{{path("donwloadFile",{'id_file': file.getId()}) }}" class="btn btn-primary btn-lg">Download</a></td>
+        <td> <a href="{{ asset('uploads/'~file.getName())}}" class="btn btn-primary btn-lg" download>Download</a></td>
     </tr>
     {% endfor %}
     </tbody>

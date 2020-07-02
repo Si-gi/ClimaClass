@@ -95,27 +95,6 @@ class ClassRoomController extends AbstractController
     }
 
     /**
-     * @param $id_files
-     * @Route("files/download/{$id_file}", name="donwloadFile")
-     */
-    public function download($id_file){
-        $file = $this->fileRepository->findOneById($id_file);
-        $dir= "/uploads/";
-        $file_name = $file->getName();
-            if (file_exists($this->getParameter("uploads").'/'.$file_name)) {
-
-                header('Content-Description: File Transfer');
-                header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename="' . basename($file_name) . '"');
-                header('Content-Length: ' . filesize($file->getFileSize()));
-                readfile($this->getParameter("uploads").'/'.$file_name);
-            }else{
-                dump($this->getParameter("uploads").'/'.$file_name);
-                dd($dir.$file_name);
-            }
-            return $this->redirectToRoute("seeFiles",['id_releve' => $file->getPublication()->getId()]);
-        }
-    /**
      * @param Request $request
      * @Route("/teacher/{classReceiver}", name="class_message")
      */

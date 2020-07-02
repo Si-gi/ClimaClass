@@ -38,6 +38,3 @@ new_publication:
 contacts:
   path: /teacher/contacts
   controller: App\Controller\UserController::seeContact
-donwloadFile:
-  path: /files/download/{id_file}
-  controller: App\Controller\ClassRoomController::download
