@@ -94,7 +94,6 @@
 {% else %}
   <a href="{{path ('teacher_class', {'page': app.request.query.get("page") + 1})}}"><i class="fa fa-arrow-circle-right fa-10x"></i></a>
 {% endif %}
-
 <script type="text/javascript">
     // create a dataSet with groups
     var names = ['Temperature(°C)', 'Wind Speed(km/h)', 'Rain Level(nm)'];
@@ -145,32 +144,86 @@
     {% for row in windSpeeds %}
         itemsWs[{{loop.index - 1}}] = {x: "{{row['date']}}" ,y:{{row['value']}},group:2};
     {% endfor %}
-                  function showMesures(){
-                  let mesures = $("#mesures");
-                  //let classrooms = document.getElementsByClassName("class-"+id);
-                      if( mesures[0].classList.contains("classroom-default")){
-                          mesures[0].classList.remove("classroom-default");
-                          mesures[0].classList.add("classroom-activ");
-                      }else{
 
-                          mesures[0].classList.remove("classroom-activ");
-                          mesures[0].classList.add("classroom-default");            }
-              }
-              function showPublications(){
-                  let publications= $("#publications");
-                  //let classrooms = document.getElementsByClassName("class-"+id);
+    var itemsRl = [];
+    {% for row in rainLevels %}
+        itemsRl[{{loop.index - 1}}] = {x: "{{row['date']}}" ,y:{{row['value']}},group:2};
+    {% endfor %}
 
-                      if( publications[0].classList.contains("classroom-default")){
-                          publications[0].classList.remove("classroom-default");
-                          publications[0].classList.add("classroom-activ");
-                      }else{
-                          publications[0].classList.remove("classroom-activ");
-                          publications[0].classList.add("classroom-default");
-                      }
-              }
+    var dataset = new vis.DataSet(items);
+    var dataSetWs = new vis.DataSet(itemsWs);
+    var dataSetRl = new vis.DataSet(itemsRl);
+
+    var options = {
+        dataAxis: {
+            showMinorLabels: false,
+            right: {
+                title: {
+                    text: 'Date'
+                }
+            }
+        },
+        legend: {left:{position:"bottom-left"}},
+        start: '2020-06-01',
+        end: '2020-07-02'
+    };
+    var optionsWs = {
+        dataAxis: {
+            showMinorLabels: false,
+            right: {
+                title: {
+                    text: 'Date'
+                }
+            }
+        },
+        legend: {left:{position:"bottom-left"}},
+        start: '2020-06-01',
+        end: '2020-07-02'
+    };
+    var optionsRl = {
+        dataAxis: {
+            showMinorLabels: false,
+            right: {
+                title: {
+                    text: 'Date'
+                }
+            }
+        },
+        legend: {left:{position:"bottom-left"}},
+        start: '2020-06-01',
+        end: '2020-07-02'
+    };
+    var graph2d = new vis.Graph2d(container, items, groups, options);
+    var graph2dws = new vis.Graph2d(containerWindSpeed, itemsWs, windspeed, optionsWs);
+    var graph2dRl = new vis.Graph2d(containerRainLevel, itemsRl, rainLevel, optionsRl);
 
 
-          </script>
+    function showMesures(){
+        let mesures = $("#mesures");
+        //let classrooms = document.getElementsByClassName("class-"+id);
+            if( mesures[0].classList.contains("classroom-default")){
+                mesures[0].classList.remove("classroom-default");
+                mesures[0].classList.add("classroom-activ");
+            }else{
+
+                mesures[0].classList.remove("classroom-activ");
+                mesures[0].classList.add("classroom-default");            }
+    }
+    function showPublications(){
+        let publications= $("#publications");
+        //let classrooms = document.getElementsByClassName("class-"+id);
+
+            if( publications[0].classList.contains("classroom-default")){
+                publications[0].classList.remove("classroom-default");
+                publications[0].classList.add("classroom-activ");
+            }else{
+                publications[0].classList.remove("classroom-activ");
+                publications[0].classList.add("classroom-default");
+            }
+    }
+
+
+</script>
     <style>
         .classroom-default{
             display: none;
