@@ -3,14 +3,15 @@
 {% block title %}Publication{% endblock %}
 
 {% block body %}
+<div class="container" style="margin-top:35px;background-color:#c9ffd6">
 <a href="{{ (app.request.headers.get('referer'))
- }}"><h6><i class="fa fa-arrow-circle-left"></i> retour aux relevés</h6></a>
+ }}"><h6><i class="fa fa-arrow-circle-left"></i> Back</h6></a>
 
     <table class="table">
         <tbody>
 
             <tr>
-                <th><h2>Titre : {{ publication.title }}</h2></th>
+                <th><h2>Title : {{ publication.title }}</h2></th>
             </tr>
             <tr>
                 <th>Description</th>
@@ -34,21 +35,21 @@
 
           {% if publication.measure.windSpeed != null %}
           <tr>
-              <th>Vitesse du vent </th>
+              <th>Wind speed </th>
               <td>{{ publication.measure.windSpeed}} km/h</td>
           </tr>
         {% endif %}
 
         {% if publication.measure.windDirection != null %}
         <tr>
-            <th>Direction du vent </th>
+            <th>Wind direction </th>
             <td>{{ publication.measure.windDirection}} °</td>
         </tr>
       {% endif %}
 
       {% if publication.measure.rainLevel != null %}
       <tr>
-          <th>Précipitations </th>
+          <th>Rain level </th>
           <td>{{ publication.measure.rainLevel}} mm</td>
       </tr>
     {% endif %}
@@ -68,4 +69,5 @@
 <br></br>
     {{ include('publication/_delete_form.html.twig') }}
   {% endif %}
+  </div>
 {% endblock %}

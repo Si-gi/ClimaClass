@@ -3,29 +3,52 @@
 {% block title %}Publication index{% endblock %}
 
 {% block body %}
-    <h3 class="titleH3">Relevés</h3>
+
+    <h3 class="titleH3">Publications</h3>
+    <div style="display:flex; justify-content:flex-end;margin-right:210px;margin-bottom:40px;">
+    <a href="{{ path('new_publication') }}"><button class="btn btn-success" style="width: 180px;
+    height: 50px;text-transform: uppercase;padding:5px;" >New publication <i class="fa fa-plus-circle"></i>
+    </div>
+ </button></a>
 
 
 
         {% for publication in publications  %}
             <div class="container ">
-            <div class="card tabPublication">
+            <div class="card tabPublication" style="padding:20px;background-color:#d6f9e6;">
             <h3 class="card-title" style="text-align:center;">  <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.title }}</a> </h3>
               <div class="card-body">
               <p>{{publication.classroom}}</p>
-              <a href="{{ path('publication_show', {'id': publication.id}) }}">{{ publication.content }}</a>
+              <b style="color:#323332;">{{ publication.content }}</b>
               <br></br>
               <hr></hr>
+              {% if publication.classroom != null %}
               <h5 class="card-subtitle mb-2 text-muted"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ publication.classroom.school.city}} ({{publication.classroom.school.state}})</h5>
+            {% endif %}
               <h6 class="card-subtitle mb-2 text-muted">{{ publication.date ? publication.date|date('Y-m-d') : '' }}</h6>
-              <a href="{{ path('publication_show', {'id': publication.id}) }}" style="text-align:right;"><button class="newbtn">voir le relevé</button> </a>
+              <a href="{{ path('publication_show', {'id': publication.id}) }}" style="text-align:right;"><button class="newbtn">See more</button> </a>
               </div>
             </div>
             </div>
 
         {% endfor %}
-        {{ knp_pagination_render(publications) }}
+        <div style="display:flex;justify-content:center;">
+        {% if app.request.query.get("page") == 1 %}
+          <a href="{{path ('publication_index', {'page': app.request.query.get("page") - 1})}}"><button disabled>Prev</button></a>
+
+        {% else %}
+          <a href="{{path ('publication_index', {'page': app.request.query.get("page") - 1})}}"><button style="margin-right:25px;">Prev</button></a>
+
+        {% endif %}
+
+        {% if app.request.query.get("page") == pages %}
+          <a href="{{path ('publication_index', {'page': app.request.query.get("page") + 1})}}"><button disabled>Next</button></a>
+
+        {% else %}
+          <a href="{{path ('publication_index', {'page': app.request.query.get("page") + 1})}}"><button>Next</button></a>
+        {% endif %}
 
 
-    <a href="{{ path('new_publication') }}">Créer un nouveau relevé </a>
+        </div>
+
 {% endblock %}

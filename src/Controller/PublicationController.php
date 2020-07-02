@@ -24,8 +24,11 @@ class PublicationController extends AbstractController
     {
       $publis=$publicationRepository->findBy([],['date' => 'DESC']);
       $publications = $paginator->paginate($publis,$request->query->getInt('page', 1),5);
+      $nbPages = count($publis) / 5;
         return $this->render('publication/showAll.html.twig', [
             'publications' => $publications,
+            'pages'=> ceil($nbPages),
+
         ]);
 
 
