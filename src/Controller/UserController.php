@@ -58,10 +58,13 @@ class UserController extends AbstractController
      */
     public function sendMessage(Request $request, $receiver){
 
+
         $userSender = $this->UserRepository->findOneByUsername($this->getUser()->getUserName());
         $userReceiver = $this->UserRepository->findOneById($receiver);
         $havecontact = $this->haveContact($userReceiver);
-
+        if($havecontact == true){
+            $this->redirectToRoute('conversation', ['contact' =>$receiver]);
+        }
         $message = new PrivateMessage();
         $date = new \DateTime();
         $message->setSendAt($date);
@@ -86,6 +89,8 @@ class UserController extends AbstractController
                 $this->entityManager->persist($contact2);
                 $this->entityManager->flush();
 
+            }else{
+                $this->redirectToRoute('conversation', ['contact' =>$receiver]);
             }
             $this->entityManager->persist($message);
 
@@ -103,8 +108,14 @@ class UserController extends AbstractController
 
     // Verifie si les utilisateurs ont déjà communiqués ou non (pour le menu des contacts) Attention bug potentiel (à vérifier)
     public function haveContact($userReceiver){
-        $haveContacts = $this->ContactsRepository->getContactWhere($this->getUser()->getUserName(),$userReceiver);
-        if( $haveContacts )
+        $messages = $this->privateMessageRepository->findBy(
+            [
+                'receiver' => $userReceiver,
+                'sender' =>$this->getUser()
+            ]
+        );
+
+        if( count($messages) >0  )
             return true;
         else{
             return false;
