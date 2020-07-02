@@ -182,4 +182,14 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/teacher/myclasses", name="seeMyClasses")
+     */
+    public function seeMyClasses(){
+
+        return $this->render('/teacher/myclasses.html.twig',[
+            'classes' => $this->getUser()->getClassroom(),
+        ]);
+    }
+
 }

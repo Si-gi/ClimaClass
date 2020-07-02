@@ -285,8 +285,9 @@
             <a class="itemss" href="{{ path('publication_index') }}" style="color:black; font-weight:bold"><img src="{{asset('images/details.png')}}" /><br> Publications</a>
             <a class="itemss" href="{{ path('new_publication') }}" style="color:black; font-weight:bold"><img src="{{asset('images/new.png')}}" /><br> New Publication</a>
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
+                <a href="{{ path("teacher_class") }}" style="color:black; font-weight:bold" ><img src="{{asset('images/renommer.png')}}" /><br> contact</a>
                 <a href="{{ path("contacts") }}" style="color:black; font-weight:bold" ><img src="{{asset('images/renommer.png')}}" /><br> contact</a>
-            {% endif %}              
+            {% endif %}
         </div>
         <a href="/logout" style="color:black; font-weight:bold"><img src="{{asset('images/logout.png')}}" /><br> logout</a>
     </div>
