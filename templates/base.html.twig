@@ -298,18 +298,21 @@
     <body style="background-color: #fffaf1">
 
     <div class="navbar" style="border-bottom: solid 1px gray">
-        <a href="{{ path('publication_index',{page:1}) }}"><img src="{{asset('images/logo_climaclass.png')}}"></a>
-        <div class="navTog">
-            <a class="itemss" href="{{ path('search') }}" style="color:black; font-weight:bold"><img src="{{asset('images/search.png')}}" /><br>Search<br></a>
-            <a class="itemss"href="{{ path('mymessages') }}" style="color:black; font-weight:bold"><img src="{{asset('images/message.png')}}" /></img><br> Messages</a>
-            <a class="itemss" href="{{ path('publication_index',{page:1}) }}" style="color:black; font-weight:bold"><img src="{{asset('images/details.png')}}" /><br> Publications</a>
-            <a class="itemss" href="{{ path('new_publication') }}" style="color:black; font-weight:bold"><img src="{{asset('images/new.png')}}" /><br> New Publication</a>
-            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
-                <a href="{{ path("teacher_class") }}" style="color:black; font-weight:bold" ><img src="{{asset('images/details.png')}}" /><br> My classrooms</a>
-                <a href="{{ path("contacts") }}" style="color:black; font-weight:bold" ><img src="{{asset('images/renommer.png')}}" /><br> contact</a>
-            {% endif %}
-        </div>
-        <a href="/logout" style="color:black; font-weight:bold"><img src="{{asset('images/logout.png')}}" /><br> logout</a>
+
+            <a href="{{ path('publication_index',{page:1}) }}"><img src="{{asset('images/logo_climaclass.png')}}"></a>
+        {% if app.user != null%}
+            <div class="navTog">
+                <a class="itemss" href="{{ path('search') }}" style="color:black; font-weight:bold"><img src="{{asset('images/search.png')}}" /><br>Search<br></a>
+                <a class="itemss"href="{{ path('mymessages') }}" style="color:black; font-weight:bold"><img src="{{asset('images/message.png')}}" /></img><br> Messages</a>
+                <a class="itemss" href="{{ path('publication_index',{page:1}) }}" style="color:black; font-weight:bold"><img src="{{asset('images/messages.png')}}" /><br> Publications</a>
+                <a class="itemss" href="{{ path('new_publication') }}" style="color:black; font-weight:bold"><img src="{{asset('images/new.png')}}" /><br> New Publication</a>
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
+                    <a href="{{ path("teacher_class") }}" style="color:black; font-weight:bold" ><img src="{{asset('images/details.png')}}" /><br> My classrooms</a>
+                    <a href="{{ path("contacts") }}" style="color:black; font-weight:bold" ><img src="{{asset('images/renommer.png')}}" /><br> contact</a>
+                {% endif %}
+            </div>
+            <a href="/logout" style="color:black; font-weight:bold"><img src="{{asset('images/logout.png')}}" /><br> logout</a>
+        {% endif %}
     </div>
 
 

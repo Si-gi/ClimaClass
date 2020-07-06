@@ -39,7 +39,8 @@ class DefaultController extends AbstractController
 
         // $videos = $this->parsing($this->__URL);
         if($this->getUser()){
-            return $this->redirectToRoute("publication");
+            $classroom = $this->getUser()->getClassroom()[0]->getId();
+            return $this->redirectToRoute("classroom_profil",['id' =>$classroom]);
         }
         else{
             return $this->redirectToRoute("fos_user_security_login");

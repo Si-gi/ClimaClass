@@ -3,6 +3,7 @@
 {% block title %} Message{% endblock %}
 
 {% block body %}
+<div class="container">
     <div class="row">
         <div class="col-sm-12 blog-main">
             {% for label, messages in app.flashes %}
@@ -29,4 +30,5 @@
             </div>
         </div>
     </div>
+</div>
 {% endblock body %}

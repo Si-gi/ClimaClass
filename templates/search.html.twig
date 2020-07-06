@@ -59,7 +59,7 @@
 
 {#                                       //<a href="{{ path('class_message',{'classReceiver': classroom.id}) }}" id="{{ classroom.id }}">
 #}                                      <a href="{{ path("classroom_profil", {'id': classroom.id,page:1}) }}">
-                                       voir classe
+                                       see classroom
                                        </a>
                                    </td>
                                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEACHER') or is_granted('ROLE_SUPER_ADMIN')%}
@@ -68,7 +68,7 @@
                                            There is no teacher
                                            {% else %}
                                                <a href="{{ path('messages_form', {'receiver': classroom.getTeacher()}) }}" id="{{ classroom.getTeacher() }}">
-                                                   Contacter prof
+                                                   contact teacher
                                                </a>
                                       {% endif %}
                                    </td>
